@@ -40,4 +40,8 @@ public class LoginActivity extends BaseActivity {
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         return false;
     }
+
+    public void onClickLoginButton2(){
+        System.out.println("Mlem");
+    }
 }
