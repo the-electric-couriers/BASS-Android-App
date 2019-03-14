@@ -38,12 +38,12 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected int getToolbarTitle() {
-        return 0;
+        return R.string.home_toolbar_title;
     }
 
     @Override
     protected int getToolbarNavigationIcon() {
-        return 0;
+        return R.drawable.ic_menu;
     }
 
     @Override

@@ -10,4 +10,7 @@
     <string name="login_main_button">Inloggen</string>
     <string name="login_no_account">Nog geen account?</string>
     <string name="login_more_info">Meer info</string>
+
+    <!-- Home Page -->
+    <string name="home_toolbar_title"></string>
 </resources>
