@@ -1,0 +1,56 @@
+import java.security.InvalidKeyException
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.electriccouriers.bass"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+            try {
+                storeFile file("app.keystore")
+                storePassword KEYSTORE_PASSWORD
+                keyAlias "key"
+                keyPassword KEY_PASSWORD
+            } catch (ignored) {
+                throw new InvalidKeyException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled true
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.0.0'
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+
+    testImplementation 'junit:junit:4.12'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}

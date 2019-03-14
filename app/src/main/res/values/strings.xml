@@ -1,0 +1,12 @@
+<resources>
+    <!-- GENERAL -->
+    <string name="app_name">BASS</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <!-- Login Page -->
+    <string name="login_welcome_title">Welkom!</string>
+    <string name="login_welcome_sub">Om de app te kunnen gaan gebruiken moet je eerst inloggen.</string>
+    <string name="login_main_button">Inloggen</string>
+    <string name="login_no_account">Nog geen account?</string>
+    <string name="login_more_info">Meer info</string>
+</resources>
