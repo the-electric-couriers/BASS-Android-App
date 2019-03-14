@@ -32,7 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
 
-//        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
 //        menuDrawerLayout = findViewById(R.id.home_drawer_layout);
 //        menuNavigationView = findViewById(R.id.nav_view);
 

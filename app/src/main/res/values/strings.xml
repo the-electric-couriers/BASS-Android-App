@@ -2,6 +2,7 @@
     <!-- GENERAL -->
     <string name="app_name">BASS</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
 
     <!-- Login Page -->
     <string name="login_welcome_title">Welkom!</string>
@@ -9,4 +10,7 @@
     <string name="login_main_button">Inloggen</string>
     <string name="login_no_account">Nog geen account?</string>
     <string name="login_more_info">Meer info</string>
+
+    <!-- Home Page -->
+    <string name="home_toolbar_title"></string>
 </resources>
