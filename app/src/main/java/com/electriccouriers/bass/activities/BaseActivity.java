@@ -24,6 +24,8 @@ public abstract class BaseActivity extends AppCompatActivity implements
     private DrawerLayout menuDrawerLayout;
     private NavigationView menuNavigationView;
 
+    //hello2
+
     /**
      * OnCreate override to init Activity
      * @param savedInstanceState bundle of information of the activity it started in
