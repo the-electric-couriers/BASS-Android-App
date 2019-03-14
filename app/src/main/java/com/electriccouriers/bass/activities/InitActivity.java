@@ -16,7 +16,12 @@ public class InitActivity extends AppCompatActivity {
 
         //TODO: First run detection
 
-        startActivity(new Intent(this, LoginActivity.class));
+        // IF user is loggedin
+        startActivity(new Intent(this, HomeActivity.class));
+
+        // IF not
+//        startActivity(new Intent(this, LoginActivity.class));
+
         finish();
     }
 }

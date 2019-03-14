@@ -2,6 +2,7 @@
     <!-- GENERAL -->
     <string name="app_name">BASS</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
 
     <!-- Login Page -->
     <string name="login_welcome_title">Welkom!</string>
