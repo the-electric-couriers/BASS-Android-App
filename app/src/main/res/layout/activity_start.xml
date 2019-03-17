@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="600dp"
         android:onClick="onClickLoginButton1"
-        android:text="Login"
+        android:text="@string/login_main_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraitBottom_toBottomOf="parent" />
@@ -21,19 +21,37 @@
         android:id="@+id/startWelkom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="200dp"
-        android:text="Welcome"
+        android:text="@string/login_welcome_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/startText"
+        android:id="@+id/startWelkomSub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Om de app te kunnen gaan
-gebruiken moet je eerst inloggen."
+        android:text="@string/login_welcome_sub"
+        android:lines="2"
         app:layout_constraintTop_toBottomOf="@id/startWelkom"
         app:layout_constraintLeft_toLeftOf="@id/startWelkom"
         android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/startNogGeen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_no_account"
+        app:layout_constraintTop_toBottomOf="@id/loginButton1"
+        app:layout_constraintLeft_toLeftOf="@id/loginButton1"
+        android:layout_marginStart="30dp"/>
+
+    <TextView
+        android:id="@+id/startMeerWeten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_more_info"
+        app:layout_constraintTop_toTopOf="@id/startNogGeen"
+        app:layout_constraintLeft_toRightOf="@id/startNogGeen"
+        android:layout_marginStart="2dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
