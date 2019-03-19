@@ -16,6 +16,20 @@
     <string name="welcome_email_address">Email adres</string>
     <string name="welcome_password">wachtwoord</string>
 
+    <!-- Meer Info Page-->
+
+    <string name="meerinfo_geen_account">Geen Account</string>
+    <string name="meerinfo_geen_account_text">Het is helaas niet mogenlijk om\n om deze app te
+        gebruiken zonder een\n account. Het is ook niet mogelijk\n om in de app een account aan te\n
+        maken. \n Alleen jouw werkgever op de\n Borchwerf die aangesloten is\n bij onze service kan
+        een account\n aanvragen voor jou. Daarna kun\n je inloggen met jouw werk-email\n en
+        aangeleverde wachtwoord.</string>
+    <string name="meerinfo_verkeerde_login">verkeerde login</string>
+    <string name="meerinfo_verkeerde_login_text">Heb je wel een account, maar\n lukt het niet om in
+        te loggen?\n Helaas kan dit in de app niet\n opgelost worden. Wij adviseren\n om bij de HR
+        afdeling van jouw\n bedrijf jouw inloggegevens te\n verifiëren. Lukt het dan nog niet\n om
+        in te loggen, dan kunnen zij\n voor jou een nieuw account\n aanvragen.</string>
+
     <!-- Home Page -->
     <string name="home_toolbar_title"></string>
 </resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textGeenAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/meerinfo_geen_account"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="32sp"
+        />
+
+    <TextView
+        android:id="@+id/textGeenAccount2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/meerinfo_geen_account_text"
+        app:layout_constraintTop_toBottomOf="@id/textGeenAccount"
+        app:layout_constraintLeft_toLeftOf="@id/textGeenAccount"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/textVerkeerdeLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/meerinfo_verkeerde_login"
+        app:layout_constraintTop_toBottomOf="@id/textGeenAccount2"
+        app:layout_constraintLeft_toLeftOf="@id/textGeenAccount2"
+        android:textSize="32sp"/>
+
+    <TextView
+        android:id="@+id/textVerkeerdeLogin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/meerinfo_verkeerde_login_text"
+        app:layout_constraintTop_toBottomOf="@id/textVerkeerdeLogin"
+        app:layout_constraintLeft_toLeftOf="@id/textVerkeerdeLogin"
+        android:textSize="20sp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
