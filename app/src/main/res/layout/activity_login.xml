@@ -15,8 +15,7 @@
         android:onClick="onClickLoginButton2"
         android:text="@string/login_main_button"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraitBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/welcomeInloggen"
