@@ -53,5 +53,6 @@
         android:text="@string/login_more_info"
         app:layout_constraintTop_toTopOf="@id/startNogGeen"
         app:layout_constraintLeft_toRightOf="@id/startNogGeen"
-        android:layout_marginStart="2dp"/>
+        android:layout_marginStart="2dp"
+        android:onClick="onClickMeerInfo"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

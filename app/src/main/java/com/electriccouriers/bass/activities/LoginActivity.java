@@ -42,6 +42,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void onClickLoginButton2(){
+        // hier word de inlog gecontroleerd
         System.out.println("Mlem");
+        setContentView(R.layout.activity_moreinfo);
     }
 }
