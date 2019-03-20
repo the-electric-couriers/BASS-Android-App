@@ -5,7 +5,7 @@ public class VerifyEmail extends Application {
         private StringBuffer buffer;
 
         @Override
-        public void start(Stage primaryStage) throws Exception{
+        protected void start(Stage primaryStage) throws Exception{
 
             String s = "tanpantaan@gmail.com";
 
