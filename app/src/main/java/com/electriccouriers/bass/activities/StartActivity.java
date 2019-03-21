@@ -26,4 +26,8 @@ public class StartActivity extends BaseActivity {
     public void onClickLoginButton1(){
         setContentView(R.layout.activity_login);
     }
+
+    public void onClickMeerInfo(){
+        setContentView(R.layout.activity_home);
+    }
 }
