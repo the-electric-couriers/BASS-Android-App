@@ -4,12 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.electriccouriers.bass.R;
+import com.electriccouriers.bass.helpers.API;
 import com.electriccouriers.bass.helpers.VerifyEmail;
+import com.electriccouriers.bass.models.Company;
+import com.electriccouriers.bass.models.User;
 
 public class LoginActivity extends BaseActivity {
 
@@ -76,9 +82,36 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void valideUserCredentials() {
-        System.out.println("Gegevens mogen naar de server");
+        String emailString = email.getText().toString();
+        String passwordString = password.getText().toString();
 
+        API.service().login(emailString, passwordString).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                System.out.println("success!");
+
+                User responseUser = response.body();
+                if(responseUser.getToken() == null) {
+                    userLoginFailed();
+                    return;
+                }
+
+                successfulLogin();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                userLoginFailed();
+            }
+        });
+    }
+
+    private void successfulLogin() {
         openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
-        finish();
+    }
+
+    private void userLoginFailed() {
+        //TODO: Login error
+        System.out.println("Login ERROR");
     }
 }
