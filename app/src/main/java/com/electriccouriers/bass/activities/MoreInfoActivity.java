@@ -10,10 +10,10 @@ import androidx.annotation.NonNull;
 public class MoreInfoActivity extends BaseActivity{
 
     @Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-}
+    }
 
     @Override
     protected int getLayoutResourceId() {

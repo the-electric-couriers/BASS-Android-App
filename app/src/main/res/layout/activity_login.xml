@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appDefaultBackground">
+    android:background="@color/appDefaultBackground"
+    tools:context=".activities.LoginActivity">
 
     <Button
         android:id="@+id/loginButton2"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="600dp"
-        android:onClick="onClickLoginButton2"
         android:text="@string/login_main_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/welcomeWachtwoord"
         app:layout_constraintLeft_toLeftOf="@id/welcomeWachtwoord"/>
 
