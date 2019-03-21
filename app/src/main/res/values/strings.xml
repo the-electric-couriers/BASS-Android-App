@@ -35,4 +35,7 @@
     <string name="home_button_aanvragen"> AANVRAGEN\n Shuttle vervoer</string>
     <string name="home_button_kaart"> KAART\n Bekijk shuttle kaart</string>
 
+    <!-- Kaart Page -->
+    <string name="kaart_image_description">Voorbeeld kaart van Nikki 2: The Reckoning</string>
+
 </resources>
