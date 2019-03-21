@@ -41,4 +41,8 @@ public class StartActivity extends BaseActivity {
     public void onClickLoginButton1(){
         openAcitivity(new Intent(StartActivity.this, LoginActivity.class), true);
     }
+
+    public void onClickMeerInfo(){
+        setContentView(R.layout.activity_home);
+    }
 }
