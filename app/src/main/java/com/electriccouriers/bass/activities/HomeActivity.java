@@ -1,5 +1,6 @@
 package com.electriccouriers.bass.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.electriccouriers.bass.R;
@@ -29,7 +30,16 @@ public class HomeActivity extends BaseActivity {
                     .zoom(13)
                     .build());
         });
+
+        findViewById(R.id.buttonAanvragen).setOnClickListener(v -> {
+            onClickAanvragen();
+        });
+
+        findViewById(R.id.buttonKaart).setOnClickListener(v ->{
+            onClickKaart();
+        });
     }
+
 
     @Override
     protected int getLayoutResourceId() {
@@ -49,6 +59,14 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected int getOptionsMenu() {
         return 0;
+    }
+
+    public void onClickAanvragen(){
+        //TODO: onClickAanvragen knop functies toevoegen.
+    }
+
+    private void onClickKaart() {
+        //TODO: onClickKaart knop functies toevoegen.
     }
 
 }
