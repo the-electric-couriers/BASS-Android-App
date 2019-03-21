@@ -1,5 +1,6 @@
 package com.electriccouriers.bass.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -76,5 +77,8 @@ public class LoginActivity extends BaseActivity {
 
     private void valideUserCredentials() {
         System.out.println("Gegevens mogen naar de server");
+
+        openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
+        finish();
     }
 }
