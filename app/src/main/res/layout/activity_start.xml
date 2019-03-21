@@ -6,17 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/loginButton1"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="600dp"
-        android:onClick="onClickLoginButton1"
-        android:text="@string/login_main_button"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
-
     <TextView
         android:id="@+id/startWelkom"
         android:layout_width="wrap_content"
@@ -37,22 +26,52 @@
         app:layout_constraintLeft_toLeftOf="@id/startWelkom"
         android:layout_marginTop="10dp"/>
 
-    <TextView
-        android:id="@+id/startNogGeen"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="@string/login_no_account"
-        app:layout_constraintTop_toBottomOf="@id/loginButton1"
-        app:layout_constraintLeft_toLeftOf="@id/loginButton1"
-        android:layout_marginStart="30dp"/>
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/startMeerWeten"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_more_info"
-        app:layout_constraintTop_toTopOf="@id/startNogGeen"
-        app:layout_constraintLeft_toRightOf="@id/startNogGeen"
-        android:layout_marginStart="2dp"
-        android:onClick="onClickMeerInfo"/>
+        <Button
+            android:id="@+id/loginButton1"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:onClick="onClickLoginButton1"
+            android:text="@string/login_main_button"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton1"
+            tools:layout_editor_absoluteX="131dp">
+
+            <TextView
+                android:id="@+id/startNogGeen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_no_account"
+                app:layout_constraintLeft_toLeftOf="@id/loginButton1"
+                app:layout_constraintTop_toBottomOf="@id/loginButton1" />
+
+            <TextView
+                android:id="@+id/startMeerWeten"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:onClick="onClickMeerInfo"
+                android:text="@string/login_more_info"
+                app:layout_constraintLeft_toRightOf="@id/startNogGeen"
+                app:layout_constraintTop_toTopOf="@id/startNogGeen" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
