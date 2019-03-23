@@ -30,5 +30,10 @@ public class KaartActivity extends BaseActivity{
         return 0;
     }
 
+    public void setSingleRow(){
+        //TODO: create function(s) that take information and put it in the scrollview
+        //TODO: rewrite the whole activity_kaart.xml because i just  remembered that you can use a tableview
+    }
+
 
 }

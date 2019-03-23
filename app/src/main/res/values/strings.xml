@@ -35,7 +35,10 @@
     <string name="home_button_aanvragen"> AANVRAGEN\n Shuttle vervoer</string>
     <string name="home_button_kaart"> KAART\n Bekijk shuttle kaart</string>
 
-    <!-- Kaart Page -->
+    <!-- kaart Page -->
     <string name="kaart_image_description">Voorbeeld kaart van Nikki 2: The Reckoning</string>
+    <string name="kaart_record1_voorbeeld"> Station Roosendaal  08:15\n 23-02-2018</string>
+    <string name="kaart_record2_voorbeeld"> Station Roosendaal  18:15\n 22-02-2018</string>
+    <string name="kaart_record3_voorbeeld"> Station Roosendaal  07:45\n 19-02-2018</string>
 
 </resources>

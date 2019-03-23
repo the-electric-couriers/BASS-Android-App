@@ -67,6 +67,12 @@ public class HomeActivity extends BaseActivity {
 
     private void onClickKaart() {
         //TODO: onClickKaart knop functies toevoegen.
+        //openAcitivity(new Intent(HomeActivity.this, HomeActivity.class));
+
+        Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+        openAcitivity(intent);
+        //HomeActivity.this,
+        System.out.println("Mram");
     }
 
 }
