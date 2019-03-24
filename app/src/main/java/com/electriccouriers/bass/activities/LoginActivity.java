@@ -30,9 +30,7 @@ public class LoginActivity extends BaseActivity {
         email = findViewById(R.id.welcomeEmailVeld);
         password = findViewById(R.id.welcomeWachtwoordVeld);
 
-        findViewById(R.id.loginButton2).setOnClickListener(v -> {
-           onClickLoginButton2();
-        });
+        findViewById(R.id.loginButton2).setOnClickListener(v -> onClickLoginButton2());
     }
 
     @Override
@@ -42,12 +40,12 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected int getToolbarTitle() {
-        return 0;
+        return R.string.title_activity_login;
     }
 
     @Override
     protected int getToolbarNavigationIcon() {
-        return 0;
+        return R.drawable.ic_back_black;
     }
 
     @Override
