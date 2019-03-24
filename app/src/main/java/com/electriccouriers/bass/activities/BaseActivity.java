@@ -2,6 +2,8 @@ package com.electriccouriers.bass.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +13,7 @@ import com.electriccouriers.bass.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 /**
@@ -22,7 +25,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public Toolbar toolbar;
 
     private DrawerLayout menuDrawerLayout;
-    private NavigationView menuNavigationView;
 
     /**
      * OnCreate override to init Activity
@@ -33,8 +35,9 @@ public abstract class BaseActivity extends AppCompatActivity implements
         setContentView(getLayoutResourceId());
 
         toolbar = findViewById(R.id.toolbar);
-//        menuDrawerLayout = findViewById(R.id.home_drawer_layout);
-//        menuNavigationView = findViewById(R.id.nav_view);
+        menuDrawerLayout = findViewById(R.id.drawer_layout);
+
+//        menuDrawerLayout.closeDrawer(GravityCompat.START);
 
         if(toolbar != null) {
             toolbar.setTitle(getToolbarTitle());
@@ -43,9 +46,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(this);
         }
-
-        if(menuNavigationView != null)
-            menuNavigationView.setNavigationItemSelectedListener(this);
     }
 
     /**
@@ -154,10 +154,11 @@ public abstract class BaseActivity extends AppCompatActivity implements
      * Open the menu drawer
      */
     private void openMenu() {
-        if(menuDrawerLayout.isDrawerOpen(menuNavigationView)) {
-            menuDrawerLayout.closeDrawer(menuNavigationView);
+        Log.e("test", "test");
+        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            menuDrawerLayout.closeDrawer(GravityCompat.START, true);
         } else {
-            menuDrawerLayout.openDrawer(menuNavigationView);
+            menuDrawerLayout.openDrawer(GravityCompat.START, true);
         }
     }
 }
