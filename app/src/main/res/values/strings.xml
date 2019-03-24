@@ -1,6 +1,7 @@
 <resources>
     <!-- GENERAL -->
     <string name="app_name">BASS</string>
+    <string name="app_version">V1.0.1</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_MoreInfo">MoreInfoActivity</string>
