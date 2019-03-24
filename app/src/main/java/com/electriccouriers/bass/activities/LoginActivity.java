@@ -42,7 +42,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected int getToolbarTitle() {
-        return 0;
+        return R.string.login_toolbar_title;
     }
 
     @Override
