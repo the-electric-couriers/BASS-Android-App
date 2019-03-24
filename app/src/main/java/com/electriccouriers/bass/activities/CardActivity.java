@@ -1,6 +1,8 @@
 package com.electriccouriers.bass.activities;
 
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.electriccouriers.bass.R;
 
@@ -8,6 +10,10 @@ public class CardActivity extends BaseActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.bass_light_apache));
     }
 
     @Override
@@ -22,7 +28,7 @@ public class CardActivity extends BaseActivity{
 
     @Override
     protected int getToolbarNavigationIcon() {
-        return R.drawable.ic_menu;
+        return R.drawable.ic_back_white;
     }
 
     @Override
