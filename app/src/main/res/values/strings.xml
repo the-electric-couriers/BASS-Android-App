@@ -8,6 +8,7 @@
     <string name="title_activities_card">CardActivity</string>
 
     <!-- Login Page -->
+    <string name="login_toolbar_title"></string>
     <string name="login_welcome_title">Welkom!</string>
     <string name="login_welcome_sub">Om de app te kunnen gaan\n gebruiken moet je eerst inloggen.</string>
     <string name="login_main_button">Inloggen</string>
