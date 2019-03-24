@@ -59,6 +59,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void onClickLoginButton2() {
+
         VerifyEmail verifyEmail = new VerifyEmail();
 
         if(email.getText().toString().isEmpty()) {
@@ -82,6 +83,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void valideUserCredentials() {
+
         String emailString = email.getText().toString();
         String passwordString = password.getText().toString();
 
@@ -103,6 +105,7 @@ public class LoginActivity extends BaseActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 userLoginFailed();
             }
+
         });
     }
 

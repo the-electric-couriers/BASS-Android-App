@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.electriccouriers.bass.R;
 
-public class KaartActivity extends BaseActivity{
+public class CardActivity extends BaseActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

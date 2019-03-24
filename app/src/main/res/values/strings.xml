@@ -3,6 +3,8 @@
     <string name="app_name">BASS</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_MoreInfo">MoreInfoActivity</string>
+    <string name="title_activities_card">CardActivity</string>
 
     <!-- Login Page -->
     <string name="login_welcome_title">Welkom!</string>
