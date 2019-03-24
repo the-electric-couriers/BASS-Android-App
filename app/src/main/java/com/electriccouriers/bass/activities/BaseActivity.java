@@ -37,7 +37,10 @@ public abstract class BaseActivity extends AppCompatActivity implements
         toolbar = findViewById(R.id.toolbar);
         menuDrawerLayout = findViewById(R.id.drawer_layout);
 
-//        menuDrawerLayout.closeDrawer(GravityCompat.START);
+        // Menu click listeners block
+        findViewById(R.id.menu_home_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_home_item));
+        findViewById(R.id.menu_profile_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_profile_item));
+        findViewById(R.id.menu_logout_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_logout_item));
 
         if(toolbar != null) {
             toolbar.setTitle(getToolbarTitle());
@@ -82,8 +85,12 @@ public abstract class BaseActivity extends AppCompatActivity implements
      */
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            menuDrawerLayout.closeDrawer(GravityCompat.START, true);
+        } else {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
     }
 
     /**
@@ -153,12 +160,33 @@ public abstract class BaseActivity extends AppCompatActivity implements
     /**
      * Open the menu drawer
      */
+    private void onMenuItemSelected(int menuItem) {
+        switch (menuItem) {
+            case R.id.menu_logout_item:
+                logout();
+                break;
+            default:
+                break;
+        }
+
+        openMenu();
+    }
+
+    /**
+     * Open the menu drawer
+     */
     private void openMenu() {
-        Log.e("test", "test");
         if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START, true);
         } else {
             menuDrawerLayout.openDrawer(GravityCompat.START, true);
         }
+    }
+
+    /**
+     * Logout current user
+     */
+    private void logout() {
+        //TODO: Logout logic
     }
 }
