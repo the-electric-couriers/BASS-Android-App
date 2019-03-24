@@ -1,5 +1,6 @@
 package com.electriccouriers.bass.models;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
@@ -102,5 +103,16 @@ public class User {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+
+    public String serialize() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    static public User create(String serializedData) {
+        Gson gson = new Gson();
+        return gson.fromJson(serializedData, User.class);
     }
 }
