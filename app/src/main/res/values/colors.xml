@@ -7,5 +7,9 @@
     <color name="white">#00FFFFFF</color>
     <color name="black">#000</color>
 
+    <color name="bass_grey">#525252</color>
+    <color name="bass_dark_apache">#CFA160</color>
+    <color name="bass_light_apache">#E4BA67</color>
+
     <color name="appDefaultBackground">#FAFAFA</color>
 </resources>
