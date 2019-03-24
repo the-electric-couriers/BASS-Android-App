@@ -37,17 +37,19 @@ public abstract class BaseActivity extends AppCompatActivity implements
         toolbar = findViewById(R.id.toolbar);
         menuDrawerLayout = findViewById(R.id.drawer_layout);
 
-        // Menu click listeners block
-        findViewById(R.id.menu_home_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_home_item));
-        findViewById(R.id.menu_profile_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_profile_item));
-        findViewById(R.id.menu_logout_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_logout_item));
-
         if(toolbar != null) {
             toolbar.setTitle(getToolbarTitle());
             toolbar.setNavigationIcon(getToolbarNavigationIcon());
 
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(this);
+        }
+
+        if(menuDrawerLayout != null) {
+            // Menu click listeners block
+            findViewById(R.id.menu_home_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_home_item));
+            findViewById(R.id.menu_profile_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_profile_item));
+            findViewById(R.id.menu_logout_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_logout_item));
         }
     }
 
@@ -85,7 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
      */
     @Override
     public void onBackPressed() {
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if(menuDrawerLayout != null && menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START, true);
         } else {
             super.onBackPressed();
