@@ -44,6 +44,12 @@ public class PreferenceHelper {
         return decrypt(passEncrypted);
     }
 
+    public static String read(Context context, String key) {
+        SharedPreferences preferences = getPreferences(context);
+        String passEncrypted = preferences.getString(key, encrypt(""));
+        return decrypt(passEncrypted);
+    }
+
     public static Boolean read(SharedPreferences preferences, String key, Boolean defaultReturn) {
         return preferences.getBoolean(key, defaultReturn);
     }

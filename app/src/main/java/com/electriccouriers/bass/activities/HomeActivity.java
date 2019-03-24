@@ -2,14 +2,24 @@ package com.electriccouriers.bass.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
+import com.electriccouriers.bass.helpers.API;
+import com.electriccouriers.bass.models.RoutePoint;
+import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.Style;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends BaseActivity {
 
@@ -35,8 +45,25 @@ public class HomeActivity extends BaseActivity {
             onClickAanvragen();
         });
 
-        findViewById(R.id.buttonKaart).setOnClickListener(v ->{
+        findViewById(R.id.buttonKaart).setOnClickListener(v -> {
             onClickKaart();
+        });
+
+        // TEMP DEBUG CODE
+        API.service().routePoints(PreferenceHelper.read(this, Globals.PrefKeys.UTOKEN)).enqueue(new Callback<List<RoutePoint>>() {
+            @Override
+            public void onResponse(Call<List<RoutePoint>> call, Response<List<RoutePoint>> response) {
+                if(response.isSuccessful()) {
+                    System.out.println(response.body().size());
+                } else {
+                    Log.e("ERROR", String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RoutePoint>> call, Throwable t) {
+                Log.e("ERROR", t.getLocalizedMessage());
+            }
         });
     }
 
