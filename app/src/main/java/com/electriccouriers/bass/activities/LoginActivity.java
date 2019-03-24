@@ -90,8 +90,6 @@ public class LoginActivity extends BaseActivity {
         API.service().login(emailString, passwordString).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                System.out.println("success!");
-
                 User responseUser = response.body();
                 if(responseUser.getToken() == null) {
                     userLoginFailed();
@@ -110,7 +108,7 @@ public class LoginActivity extends BaseActivity {
 
     private void successfulLogin(User user) {
         PreferenceHelper.save(this, Globals.PrefKeys.MAIN_USER, user.serialize());
-        PreferenceHelper.save(this, Globals.PrefKeys.UTOKEN, user.getToken());
+        PreferenceHelper.save(this, Globals.PrefKeys.UTOKEN, "Token " + user.getToken());
 
         openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
     }
