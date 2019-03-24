@@ -9,7 +9,6 @@ public final class Globals {
 
     public static final class PrefKeys {
         public static final String UTOKEN = "shared_preference_user_token_key";
-        public static final String LOGIN_USER = "shared_preference_user_key";
-        public static final String LOGIN_USERNAME = "shared_preference_user_name_key";
+        public static final String MAIN_USER = "shared_preference_user_key";
     }
 }

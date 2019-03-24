@@ -12,10 +12,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.electriccouriers.bass.R;
+import com.electriccouriers.bass.data.Globals;
 import com.electriccouriers.bass.helpers.API;
 import com.electriccouriers.bass.helpers.VerifyEmail;
 import com.electriccouriers.bass.models.Company;
 import com.electriccouriers.bass.models.User;
+import com.electriccouriers.bass.preferences.PreferenceHelper;
 
 public class LoginActivity extends BaseActivity {
 
@@ -98,7 +100,7 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
 
-                successfulLogin();
+                successfulLogin(responseUser);
             }
 
             @Override
@@ -109,7 +111,10 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    private void successfulLogin() {
+    private void successfulLogin(User user) {
+        PreferenceHelper.save(this, Globals.PrefKeys.MAIN_USER, user.serialize());
+        PreferenceHelper.save(this, Globals.PrefKeys.UTOKEN, user.getToken());
+
         openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
     }
 
