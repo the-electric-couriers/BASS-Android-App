@@ -19,6 +19,7 @@
 
     <string name="welcome_email_address">Email adres</string>
     <string name="welcome_password">wachtwoord</string>
+    <string name="empty_text"></string>
 
     <!-- Meer Info Page-->
 

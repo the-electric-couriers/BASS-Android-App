@@ -10,9 +10,10 @@
         android:id="@+id/startWelkom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="90dp"
         android:text="@string/login_welcome_title"
+        android:textSize="80sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,11 +21,12 @@
         android:id="@+id/startWelkomSub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login_welcome_sub"
+        android:layout_marginTop="10dp"
         android:lines="2"
-        app:layout_constraintTop_toBottomOf="@id/startWelkom"
+        android:text="@string/login_welcome_sub"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="@id/startWelkom"
-        android:layout_marginTop="10dp"/>
+        app:layout_constraintTop_toBottomOf="@id/startWelkom" />
 
     <LinearLayout
         android:layout_width="350dp"
