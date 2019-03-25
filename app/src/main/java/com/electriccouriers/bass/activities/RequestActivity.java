@@ -19,37 +19,29 @@ public class RequestActivity extends BaseActivity {
 
         setContentView(R.layout.activity_request);
 
-        beginLocationButton = (Button) findViewById(R.id.BeginLocation);
-        beginLocationButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View V)  {
-
-            PopupMenu pm = new PopupMenu (RequestActivity.this,beginLocationButton);
+        beginLocationButton = (Button) findViewById(R.id.beginlocation);
+        beginLocationButton.setOnClickListener(v -> {
+            PopupMenu pm = new PopupMenu(RequestActivity.this, beginLocationButton);
             pm.getMenuInflater().inflate(R.menu.popup_menu, pm.getMenu());
-            pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem BeginLocationButton) {
-                    switch (item.getItemId() {
-                        case R.id.first:
-                            Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT.show();
-                            return true;
+            pm.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.first:
+                        Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        return true;
 
-                        case R.id.second:
-                            Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT.show();
-                            return true;
+                    case R.id.second:
+                        Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        return true;
 
-                        case R.id.third:
-                            Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT.show();
-                            return true;
-                    }
-
-                    return true;
-
+                    case R.id.third:
+                        Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        return true;
                 }
+
+                return true;
             });
-                            pm.show();
-
-
+        });
+    }
 
     @Override
     protected int getLayoutResourceId() {
@@ -71,11 +63,3 @@ public class RequestActivity extends BaseActivity {
         return 0;
     }
 }
-
-    });
-
-
-
-
-
-
