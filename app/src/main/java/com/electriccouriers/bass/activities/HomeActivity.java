@@ -1,5 +1,6 @@
 package com.electriccouriers.bass.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,7 +15,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.Style;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,6 +41,14 @@ public class HomeActivity extends BaseActivity {
                     .build());
         });
 
+        findViewById(R.id.buttonAanvragen).setOnClickListener(v -> {
+            onClickAanvragen();
+        });
+
+        findViewById(R.id.buttonKaart).setOnClickListener(v -> {
+            onClickKaart();
+        });
+
         // TEMP DEBUG CODE
         API.service().routePoints(PreferenceHelper.read(this, Globals.PrefKeys.UTOKEN)).enqueue(new Callback<List<RoutePoint>>() {
             @Override
@@ -58,6 +66,7 @@ public class HomeActivity extends BaseActivity {
             }
         });
     }
+
 
     @Override
     protected int getLayoutResourceId() {
@@ -77,6 +86,16 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected int getOptionsMenu() {
         return 0;
+    }
+
+    public void onClickAanvragen(){
+        //TODO: onClickAanvragen knop functies toevoegen.
+        openAcitivity(new Intent(HomeActivity.this, RequestActivity.class), true);
+    }
+
+    private void onClickKaart() {
+        //TODO: onClickKaart knop functies toevoegen.
+        openAcitivity(new Intent(HomeActivity.this, CardActivity.class), true);
     }
 
 }

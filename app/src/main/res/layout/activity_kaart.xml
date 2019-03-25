@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_card"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:id="@+id/imageKaart"
+            android:layout_width="wrap_content"
+            android:layout_height="267dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="@string/kaart_image_description"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include"
+            app:srcCompat="@drawable/kaart" />
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview_card_history"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_card" />
+
+    <!--<ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/kaartViewRecord1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record1_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record2_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record3_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record1_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record2_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record3_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record1_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record2_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record3_voorbeeld"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/kaartViewRecord10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kaart_record1_voorbeeld"
+                android:textSize="26sp" />
+        </LinearLayout>
+    </ScrollView>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

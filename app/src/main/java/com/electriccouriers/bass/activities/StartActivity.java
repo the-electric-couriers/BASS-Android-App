@@ -16,6 +16,9 @@ public class StartActivity extends BaseActivity {
         findViewById(R.id.loginButton1).setOnClickListener(v -> {
             onClickLoginButton1();
         });
+        findViewById(R.id.startMeerWeten).setOnClickListener(v -> {
+            onClickMeerInfo();
+        });
     }
 
     @Override
@@ -43,6 +46,6 @@ public class StartActivity extends BaseActivity {
     }
 
     public void onClickMeerInfo(){
-        setContentView(R.layout.activity_home);
+        openAcitivity(new Intent(StartActivity.this, MoreInfoActivity.class), true);
     }
 }

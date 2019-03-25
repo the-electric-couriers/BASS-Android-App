@@ -30,9 +30,7 @@ public class LoginActivity extends BaseActivity {
         email = findViewById(R.id.welcomeEmailVeld);
         password = findViewById(R.id.welcomeWachtwoordVeld);
 
-        findViewById(R.id.loginButton2).setOnClickListener(v -> {
-           onClickLoginButton2();
-        });
+        findViewById(R.id.loginButton2).setOnClickListener(v -> onClickLoginButton2());
     }
 
     @Override
@@ -42,12 +40,12 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected int getToolbarTitle() {
-        return 0;
+        return R.string.login_toolbar_title;
     }
 
     @Override
     protected int getToolbarNavigationIcon() {
-        return 0;
+        return R.drawable.ic_back_black;
     }
 
     @Override
@@ -61,6 +59,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void onClickLoginButton2() {
+
         VerifyEmail verifyEmail = new VerifyEmail();
 
         if(email.getText().toString().isEmpty()) {
@@ -84,6 +83,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void valideUserCredentials() {
+
         String emailString = email.getText().toString();
         String passwordString = password.getText().toString();
 
@@ -103,6 +103,7 @@ public class LoginActivity extends BaseActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 userLoginFailed();
             }
+
         });
     }
 
