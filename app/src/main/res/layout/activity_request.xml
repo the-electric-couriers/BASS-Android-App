@@ -27,19 +27,19 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Shut 03" />
+            android:text="@string/textview" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="50dp" />
+            android:text="@string/textview3"
+            android:textSize="50sp" />
 
         <ImageView
             android:id="@+id/imageKaart"
             android:layout_width="wrap_content"
-            android:layout_height="267dp"
+            android:layout_height="269dp"
             android:layout_marginStart="115dp"
             android:layout_marginBottom="20dp"
             android:contentDescription="@string/kaart_image_description"
@@ -52,10 +52,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/layout_card">
+        app:layout_constraintTop_toBottomOf="@+id/layout_card"
+        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/beginlocation"
@@ -67,8 +68,8 @@
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="@string/pickupTime" />
