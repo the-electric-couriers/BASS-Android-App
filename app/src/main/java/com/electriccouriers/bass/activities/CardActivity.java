@@ -3,8 +3,14 @@ package com.electriccouriers.bass.activities;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.electriccouriers.bass.R;
+import com.electriccouriers.bass.adapters.CardHistoryListAdapter;
+import com.electriccouriers.bass.models.History;
+
+import java.util.ArrayList;
 
 public class CardActivity extends BaseActivity{
 
@@ -14,6 +20,15 @@ public class CardActivity extends BaseActivity{
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.bass_light_apache));
+
+        ArrayList<History> dataSet = new ArrayList<>();
+        dataSet.add(new History("Test", "Vandaag", "12:00", 0, 0));
+        dataSet.add(new History("Test2", "Gisteren", "32:00", 1, 1));
+
+        CardHistoryListAdapter adapter = new CardHistoryListAdapter(dataSet, this);
+
+        ListView listViewItems = findViewById(R.id.listview_card_history);
+        listViewItems.setAdapter(adapter);
     }
 
     @Override
