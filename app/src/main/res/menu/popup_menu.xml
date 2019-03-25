@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/first"
+        android:title="Roosendaal Station"></item>
+
+    <item
+        android:id="@+id/second"
+        android:title="De Vos"></item>
+
+    <item
+        android:id="@+id/third"
+        android:title="Primark"></item>
+
+    </menu>
