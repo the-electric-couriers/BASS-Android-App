@@ -90,6 +90,7 @@ public class HomeActivity extends BaseActivity {
 
     public void onClickAanvragen(){
         //TODO: onClickAanvragen knop functies toevoegen.
+        openAcitivity(new Intent(HomeActivity.this, RequestActivity.class), true);
     }
 
     private void onClickKaart() {
