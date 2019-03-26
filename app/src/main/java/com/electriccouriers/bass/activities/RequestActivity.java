@@ -13,13 +13,13 @@ import com.electriccouriers.bass.R;
 public class RequestActivity extends BaseActivity {
 
     Button beginLocationButton;
-    Ophaaltijd time;
+    Button5 time;
 
-    @Override
+  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.RequestActivity);
-        time = (Ophaaltijd) findViewById(R.id.time);
+        setContentView(R.layout.activity_request);
+        time = (button5) findViewById(R.id.time);
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,17 +28,17 @@ public class RequestActivity extends BaseActivity {
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(RequestActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
+
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         time.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, true);
-                mTimePicker.setTitle("Selecteer een tijdstip");
+                mTimePicker.setTitle("Ophaaltijd");
                 mTimePicker.show();
 
             }
         });
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
