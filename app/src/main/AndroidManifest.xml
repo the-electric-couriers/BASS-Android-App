@@ -45,6 +45,10 @@
             android:name=".activities.RequestActivity"
             android:label="@string/title_activities_card"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:label="@string/title_activities_profile"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

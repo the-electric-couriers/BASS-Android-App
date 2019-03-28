@@ -6,6 +6,7 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_MoreInfo">MoreInfoActivity</string>
     <string name="title_activities_card">CardActivity</string>
+    <string name="title_activities_profile">ProfileActivity</string>
 
     <!-- Login Page -->
     <string name="login_toolbar_title"></string>
@@ -17,17 +18,16 @@
     <string name="login_leeg_email_bericht">Vul een email in</string>
     <string name="login_verkeerd_email_bericht">Uw email word niet herkend</string>
     <string name="login_leeg_password">Vul uw wachtwoord in</string>
+    <string name="login_form_error">Controleer uw gegevens</string>
 
 
 
     <!-- Welcome Page -->
-
     <string name="welcome_email_address">Email adres</string>
     <string name="welcome_password">wachtwoord</string>
     <string name="empty_text"></string>
 
     <!-- Meer Info Page-->
-
     <string name="meerinfo_geen_account">Geen Account</string>
     <string name="meerinfo_geen_account_text">Het is helaas niet mogenlijk om\n om deze app te
         gebruiken zonder een\n account. Het is ook niet mogelijk\n om in de app een account aan te\n
@@ -62,6 +62,9 @@
     <string name="textview">shut 03</string>
     <string name="textview3"> Shuttle bus</string>
 
+
+    <!-- Profile Page -->
+    <string name="profile_toolbar_title"></string>
 
 
 </resources>

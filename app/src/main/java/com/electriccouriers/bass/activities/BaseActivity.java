@@ -174,6 +174,9 @@ public abstract class BaseActivity extends AppCompatActivity implements
             case R.id.menu_logout_item:
                 logout();
                 break;
+            case R.id.menu_profile_item:
+                openAcitivity(new Intent(this, ProfileActivity.class), true);
+                break;
             default:
                 break;
         }
