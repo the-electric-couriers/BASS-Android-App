@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.google.android.material.navigation.NavigationView;
 import com.electriccouriers.bass.R;
 
@@ -189,6 +190,8 @@ public abstract class BaseActivity extends AppCompatActivity implements
      * Logout current user
      */
     private void logout() {
-        //TODO: Logout logic
+        PreferenceHelper.clearAll(this);
+        openAcitivity(new Intent(BaseActivity.this, StartActivity.class));
+        finish();
     }
 }
