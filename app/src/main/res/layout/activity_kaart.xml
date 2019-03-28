@@ -81,10 +81,23 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:textColor="@color/dark_grey"
+        android:textSize="12sp"
+        android:id="@+id/cardTxtGeschiedenis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/kaart_geschiedenis"
+        app:layout_constraintBottom_toTopOf="@+id/listview_card_history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_card" />
+
     <ListView
         android:id="@+id/listview_card_history"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
