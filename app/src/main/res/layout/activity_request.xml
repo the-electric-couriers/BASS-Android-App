@@ -9,11 +9,11 @@
     <LinearLayout
         android:id="@+id/layout_card"
         android:layout_width="match_parent"
-        android:layout_height="458dp"
+        android:layout_height="361dp"
         android:background="@drawable/background_card"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -40,7 +40,7 @@
         <ImageView
             android:id="@+id/imageKaart"
             android:layout_width="wrap_content"
-            android:layout_height="370dp"
+            android:layout_height="234dp"
             android:layout_marginStart="115dp"
             android:layout_marginBottom="50dp"
             android:contentDescription="@string/kaart_image_description"
@@ -53,7 +53,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/layout_card"
