@@ -38,13 +38,13 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
+            android:background="@drawable/rounded_edges"
             android:id="@+id/loginButton1"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:onClick="onClickLoginButton1"
             android:text="@string/login_main_button"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@color/bass_light_apache"
             android:textColor="@color/white"/>
 
         <LinearLayout
