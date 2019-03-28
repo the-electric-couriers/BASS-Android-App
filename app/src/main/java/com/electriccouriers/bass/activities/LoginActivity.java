@@ -1,5 +1,6 @@
 package com.electriccouriers.bass.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -64,18 +65,20 @@ public class LoginActivity extends BaseActivity {
         VerifyEmail verifyEmail = new VerifyEmail();
 
         if(email.getText().toString().isEmpty()) {
-            email.setError(getString(R.string.login_empty_email_message));
-            showError(getString(R.string.login_empty_email_message));
+            email.setError(getString(R.string.login_leeg_email_bericht));
+            showError(getString(R.string.login_leeg_email_bericht));
             return;
         }
 
         if(!verifyEmail.verify(email.getText().toString())) {
-            //TODO: Geen valid email error
+            email.setError(getString(R.string.login_verkeerd_email_bericht));
+            showError(getString(R.string.login_verkeerd_email_bericht));
             return;
         }
 
         if(password.getText().toString().isEmpty()) {
-            //TODO: Leeg password veld error
+            password.setError(getString(R.string.login_leeg_password));
+            showError(getString(R.string.login_leeg_password));
             return;
         }
 
@@ -120,7 +123,19 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void userLoginFailed() {
-        //TODO: Login error
-        System.out.println("Login ERROR");
+        EditText usernameEditText = (EditText) findViewById(R.id.welcomeEmailVeld);
+        EditText passwordEditText = (EditText) findViewById(R.id.welcomeWachtwoordVeld);
+
+            String emailString = email.getText().toString();
+            String passwordString = password.getText().toString();
+
+            if(usernameEditText == null || passwordEditText == null) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Foutmelding")
+                        .setMessage("Uw email en/of wachtwoord wordt niet herkend.")
+                        .show();
+            }
+        }
+
     }
-}
+

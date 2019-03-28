@@ -14,7 +14,11 @@
     <string name="login_main_button">Inloggen</string>
     <string name="login_no_account">Nog geen account?</string>
     <string name="login_more_info">Meer info</string>
-    <string name="login_empty_email_message">Empty email message</string>
+    <string name="login_leeg_email_bericht">Vul een email in</string>
+    <string name="login_verkeerd_email_bericht">Uw email word niet herkend</string>
+    <string name="login_leeg_password">Vul uw wachtwoord in</string>
+
+
 
     <!-- Welcome Page -->
 
