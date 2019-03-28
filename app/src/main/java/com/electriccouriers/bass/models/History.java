@@ -9,6 +9,9 @@ public class History {
     @SerializedName("routePointName")
     private String routePointName;
 
+    @SerializedName("timestamp")
+    private String timestamp;
+
     @SerializedName("date")
     private String date;
 
@@ -21,8 +24,9 @@ public class History {
     @SerializedName("type")
     private Integer type;
 
-    public History(String routePointName, String date, String time, Integer status, Integer type) {
+    public History(String routePointName, String timestamp, String date, String time, Integer status, Integer type) {
         this.routePointName = routePointName;
+        this.timestamp = timestamp;
         this.date = date;
         this.time = time;
         this.status = status;
@@ -35,6 +39,14 @@ public class History {
 
     public String getRoutePointName() {
         return routePointName;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setDate(String date) {

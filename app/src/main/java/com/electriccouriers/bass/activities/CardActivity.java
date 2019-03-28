@@ -27,6 +27,8 @@ import com.electriccouriers.bass.models.User;
 import com.electriccouriers.bass.preferences.PreferenceHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import androidx.annotation.Nullable;
 import retrofit2.Call;
@@ -112,6 +114,7 @@ public class CardActivity extends BaseActivity implements RequestListener {
     }
 
     private void setListView() {
+        Collections.sort(dataSet, (o1, o2) -> o2.getTimestamp().compareTo(o1.getTimestamp()));
         CardHistoryListAdapter adapter = new CardHistoryListAdapter(dataSet, this);
 
         ListView listViewItems = findViewById(R.id.listview_card_history);
