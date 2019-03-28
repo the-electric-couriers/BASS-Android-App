@@ -32,9 +32,12 @@ public class User {
     @SerializedName("routePointID")
     private Integer routePointID;
 
+    @SerializedName("accessCode")
+    private String accessCode;
+
     private Company company;
 
-    public User(Integer userID, String email, String token, Integer admin, String firstname, String lastname, Integer companyID, String companyName, Integer routePointID) {
+    public User(Integer userID, String email, String token, Integer admin, String firstname, String lastname, Integer companyID, String companyName, Integer routePointID, String accessCode) {
         this.userID = userID;
         this.email = email;
         this.token = token;
@@ -45,6 +48,7 @@ public class User {
         this.companyID = companyID;
         this.companyName = companyName;
         this.routePointID = routePointID;
+        this.accessCode = accessCode;
 
         this.company = new Company(companyID, companyName, routePointID);
     }
@@ -97,12 +101,24 @@ public class User {
         this.lastname = lastname;
     }
 
+    public String getFullName() {
+        return this.firstname + " " + this.lastname;
+    }
+
     public Company getCompany() {
         return company;
     }
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public String getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
     }
 
 

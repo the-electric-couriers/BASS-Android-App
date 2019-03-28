@@ -21,10 +21,12 @@
         android:id="@+id/loginButton2"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="54dp"
         android:text="@string/login_main_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/bass_light_apache"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/welcomeInloggen"

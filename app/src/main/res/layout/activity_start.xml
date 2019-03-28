@@ -10,12 +10,13 @@
         android:id="@+id/startWelkom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="90dp"
         android:text="@string/login_welcome_title"
         android:textSize="80sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/bass_grey"/>
 
     <TextView
         android:id="@+id/startWelkomSub"
@@ -30,7 +31,7 @@
 
     <LinearLayout
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +44,8 @@
             android:onClick="onClickLoginButton1"
             android:text="@string/login_main_button"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/bass_light_apache"
+            android:textColor="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +72,8 @@
                 android:layout_marginStart="5dp"
                 android:text="@string/login_more_info"
                 app:layout_constraintLeft_toRightOf="@id/startNogGeen"
-                app:layout_constraintTop_toTopOf="@id/startNogGeen" />
+                app:layout_constraintTop_toTopOf="@id/startNogGeen"
+                android:textColor="@color/bass_light_apache"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 
@@ -90,6 +91,11 @@ public class LoginActivity extends BaseActivity {
         API.service().login(emailString, passwordString).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                if(!response.isSuccessful()) {
+                    userLoginFailed();
+                    return;
+                }
+
                 User responseUser = response.body();
                 if(responseUser.getToken() == null) {
                     userLoginFailed();
