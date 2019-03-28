@@ -1,5 +1,6 @@
 package com.electriccouriers.bass.models;
 
+import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
