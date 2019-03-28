@@ -12,18 +12,17 @@ import com.electriccouriers.bass.R;
 
 public class RequestActivity extends BaseActivity {
 
-<<<<<<< HEAD
     Button beginLocationButton;
     Button5 time;
-=======
-    /*Button beginLocationButton;
     EditText time;
->>>>>>> 2093571485506c22722afa0050ef6eee34487ba8
+
 
   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_request);
+
         time = (button5) findViewById(R.id.time);
         time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +42,7 @@ public class RequestActivity extends BaseActivity {
 
             }
         });
-    }*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class RequestActivity extends BaseActivity {
 
         setContentView(R.layout.activity_request);
 
-       /* beginLocationButton = (Button) findViewById(R.id.beginlocation);
+        beginLocationButton = (Button) findViewById(R.id.beginlocation);
         beginLocationButton.setOnClickListener(v -> {
             Log.e("log", "click");
             PopupMenu pm = new PopupMenu(RequestActivity.this, beginLocationButton);
@@ -65,17 +64,21 @@ public class RequestActivity extends BaseActivity {
 
                     case R.id.second:
                         Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        beginLocationButton.setText("De vos");
+
                         return true;
 
                     case R.id.third:
                         Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        beginLocationButton.setText("Primark");
+
                         return true;
                 }
 
                 return true;
             });
             pm.show();
-        });*/
+        });
     }
 
 
