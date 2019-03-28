@@ -163,7 +163,7 @@ public class HomeActivity extends BaseActivity {
         runnable = new Runnable() {
             @Override
             public void run() {
-                if ((routeCoordinateList.size() - 1 > count)) {
+                if(routeCoordinateList.size() - 1 > count) {
                     Point nextLocation = routeCoordinateList.get(count + 1);
 
                     if(markerIconAnimator != null && markerIconAnimator.isStarted()) {
@@ -178,6 +178,10 @@ public class HomeActivity extends BaseActivity {
                     markerIconAnimator.start();
 
                     count++;
+
+                    if(routeCoordinateList.size() - 1 == count) {
+                        count = 0;
+                    }
 
                     handler.postDelayed(this, 1000);
                 }

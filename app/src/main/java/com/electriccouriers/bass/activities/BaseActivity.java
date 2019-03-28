@@ -11,6 +11,7 @@ import android.view.View;
 import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.google.android.material.navigation.NavigationView;
 import com.electriccouriers.bass.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -158,6 +159,11 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
         if(animated)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    public void showError(String error) {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), error, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     /**

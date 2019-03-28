@@ -64,7 +64,8 @@ public class LoginActivity extends BaseActivity {
         VerifyEmail verifyEmail = new VerifyEmail();
 
         if(email.getText().toString().isEmpty()) {
-            //TODO: Leeg email veld error
+            email.setError(getString(R.string.login_empty_email_message));
+            showError(getString(R.string.login_empty_email_message));
             return;
         }
 
@@ -78,9 +79,7 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        //TODO: Gegevens naar sever doorgeven, liefste met aparte method
         valideUserCredentials();
-
     }
 
     private void valideUserCredentials() {
