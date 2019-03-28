@@ -55,6 +55,7 @@ public class HomeActivity extends BaseActivity {
             public void onResponse(Call<List<RoutePoint>> call, Response<List<RoutePoint>> response) {
                 if(response.isSuccessful()) {
                     System.out.println(response.body().size());
+                    System.out.println(response.body().get(0).getName());
                 } else {
                     Log.e("ERROR", String.valueOf(response.code()));
                 }
