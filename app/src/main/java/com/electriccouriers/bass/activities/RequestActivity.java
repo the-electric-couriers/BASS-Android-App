@@ -16,7 +16,7 @@ import java.util.Calendar;
 
 public class RequestActivity extends BaseActivity {
 
-    Button beginLocationButton, time;
+    Button beginLocationButton, time, endlocationbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,44 @@ public class RequestActivity extends BaseActivity {
 
                     case R.id.second:
                         Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        beginLocationButton.setText("De vos");
+
                         return true;
 
                     case R.id.third:
                         Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        beginLocationButton.setText("Primark");
+
+                        return true;
+                }
+
+                return true;
+            });
+            pm.show();
+        });
+
+        endlocationbutton = findViewById(R.id.EndLocation);
+        endlocationbutton.setOnClickListener(v -> {
+            Log.e("log", "click");
+            PopupMenu pm = new PopupMenu(RequestActivity.this, endlocationbutton);
+            pm.getMenuInflater().inflate(R.menu.popup_menu, pm.getMenu());
+            pm.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.first:
+                        Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        endlocationbutton.setText("Roosendaal Station");
+                        return true;
+
+                    case R.id.second:
+                        Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        endlocationbutton.setText("De vos");
+
+                        return true;
+
+                    case R.id.third:
+                        Toast.makeText(RequestActivity.this, "Geselecteerd!", Toast.LENGTH_SHORT).show();
+                        endlocationbutton.setText("Primark");
+
                         return true;
                 }
 
