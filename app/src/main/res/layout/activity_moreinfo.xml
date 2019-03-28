@@ -6,42 +6,54 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/textGeenAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/meerinfo_geen_account"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="32sp"
-        android:textColor="@color/bass_grey"
-        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textGeenAccount2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/meerinfo_geen_account_text"
-        app:layout_constraintTop_toBottomOf="@id/textGeenAccount"
-        app:layout_constraintLeft_toLeftOf="@id/textGeenAccount"
-        android:textSize="20sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textVerkeerdeLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/meerinfo_verkeerde_login"
-        app:layout_constraintTop_toBottomOf="@id/textGeenAccount2"
-        app:layout_constraintLeft_toLeftOf="@id/textGeenAccount2"
-        android:textSize="32sp"
-        android:textColor="@color/bass_grey"/>
+            <TextView
+                android:id="@+id/textGeenAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/meerinfo_geen_account"
+                android:textColor="@color/bass_grey"
+                android:textSize="32sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textVerkeerdeLogin2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/meerinfo_verkeerde_login_text"
-        app:layout_constraintTop_toBottomOf="@id/textVerkeerdeLogin"
-        app:layout_constraintLeft_toLeftOf="@id/textVerkeerdeLogin"
-        android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/textVerkeerdeLogin2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/meerinfo_verkeerde_login_text"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="@id/textVerkeerdeLogin"
+                app:layout_constraintTop_toBottomOf="@id/textVerkeerdeLogin" />
+
+            <TextView
+                android:id="@+id/textVerkeerdeLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/meerinfo_verkeerde_login"
+                android:textColor="@color/bass_grey"
+                android:textSize="32sp"
+                app:layout_constraintLeft_toLeftOf="@id/textGeenAccount2"
+                app:layout_constraintTop_toBottomOf="@id/textGeenAccount2" />
+
+            <TextView
+                android:id="@+id/textGeenAccount2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/meerinfo_geen_account_text"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="@id/textGeenAccount"
+                app:layout_constraintTop_toBottomOf="@id/textGeenAccount" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
