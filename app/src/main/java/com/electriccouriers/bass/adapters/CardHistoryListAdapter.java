@@ -40,7 +40,7 @@ public class CardHistoryListAdapter extends ArrayAdapter<History> {
         TextView routeTime = convertView.findViewById(R.id.Card_Time);
         System.out.println(historyItem.getTime());
         StringBuilder b = new StringBuilder(historyItem.getTime());
-        b = new StringBuilder(b.substring(0, 4));
+        b = new StringBuilder(b.substring(0, 5));
         //routeTime.setText(historyItem.getTime());
         routeTime.setText(b.toString());
 
