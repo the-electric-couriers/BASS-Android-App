@@ -8,6 +8,7 @@
     <string name="title_activities_card">CardActivity</string>
     <string name="title_activities_profile">ProfileActivity</string>
 
+
     <!-- Login Page -->
     <string name="login_toolbar_title"></string>
     <string name="login_welcome_title">Welkom!</string>
@@ -21,7 +22,6 @@
     <string name="login_form_error">Controleer uw gegevens</string>
 
 
-
     <!-- Welcome Page -->
     <string name="welcome_email_address">Email</string>
     <string name="welcome_password">Wachtwoord</string>
@@ -31,11 +31,7 @@
     <!-- Meer Info Page-->
     <string name="meerinfo_toolbar_title"></string>
     <string name="meerinfo_geen_account">Geen Account</string>
-    <string name="meerinfo_geen_account_text">Het is helaas niet mogenlijk om om deze app te
-        gebruiken zonder een account. Het is ook niet mogelijk om in de app een account aan te
-        maken.  Alleen jouw werkgever op de Borchwerf die aangesloten is bij onze service kan
-        een account aanvragen voor jou. Daarna kun je inloggen met jouw werk-email en
-        aangeleverde wachtwoord.</string>
+    <string name="meerinfo_geen_account_text">Het is helaas niet mogelijk om deze app te gebruiken zonder een account. Het is ook niet mogelijk om in de app een account aan te maken.\n\nAlleen jouw werkgever op de Borchwerf die aangesloten is bij onze service kan een account aanvragen voor jou. Daarna kun je inloggen met jouw werk-email en aangeleverde wachtwoord.</string>
     <string name="meerinfo_verkeerde_login">Verkeerde login</string>
     <string name="meerinfo_verkeerde_login_text">Heb je wel een account, maar lukt het niet om in
         te loggen? Helaas kan dit in de app niet opgelost worden. Wij adviseren om bij de HR
@@ -45,17 +41,21 @@
 
     <!-- Home Page -->
     <string name="home_toolbar_title"></string>
-    <string name="home_button_aanvragen"> AANVRAGEN Shuttle vervoer</string>
-    <string name="home_button_kaart"> KAART Bekijk shuttle kaart</string>
+    <string name="home_button_aanvragen">Aanvragen</string>
+    <string name="home_button_aanvragen_sub">Shuttle vervoer</string>
+    <string name="home_button_kaart">KAART</string>
+    <string name="home_button_kaart_sub">Bekijk shuttle card</string>
 
-    <!-- kaart Page -->
+
+    <!-- Kaart Page -->
     <string name="kaart_image_description">Voorbeeld kaart van Nikki 2: The Reckoning</string>
     <string name="kaart_record1_voorbeeld"> Station Roosendaal  08:15 23-02-2018</string>
     <string name="kaart_record2_voorbeeld"> Station Roosendaal  18:15 22-02-2018</string>
     <string name="kaart_record3_voorbeeld"> Station Roosendaal  07:45 19-02-2018</string>
     <string name="kaart_geschiedenis">Geschiedenis</string>
 
-    <!-- request Page -->
+
+    <!-- Request Page -->
     <string name="request_Shuttle">Shuttlebus</string>
     <string name="request_imageBus">Image</string>
     <string name="requestbutton">Aanvragen</string>
@@ -68,6 +68,5 @@
 
     <!-- Profile Page -->
     <string name="profile_toolbar_title"></string>
-
 
 </resources>

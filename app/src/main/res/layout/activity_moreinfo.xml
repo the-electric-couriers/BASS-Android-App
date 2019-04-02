@@ -19,6 +19,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,9 +36,10 @@
                 android:id="@+id/textGeenAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bebasneue_bold"
                 android:text="@string/meerinfo_geen_account"
                 android:textColor="@color/bass_grey"
-                android:textSize="32sp"
+                android:textSize="50sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,9 +47,11 @@
                 android:id="@+id/textVerkeerdeLogin2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="50dp"
-                android:text="@string/meerinfo_verkeerde_login_text"
-                android:textSize="20sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/meerinfo_geen_account_text"
+                android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="@id/textVerkeerdeLogin"
                 app:layout_constraintTop_toBottomOf="@id/textVerkeerdeLogin" />
 
@@ -55,9 +59,10 @@
                 android:id="@+id/textVerkeerdeLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bebasneue_bold"
                 android:text="@string/meerinfo_verkeerde_login"
                 android:textColor="@color/bass_grey"
-                android:textSize="32sp"
+                android:textSize="50sp"
                 app:layout_constraintLeft_toLeftOf="@id/textGeenAccount2"
                 app:layout_constraintTop_toBottomOf="@id/textGeenAccount2" />
 
@@ -65,8 +70,11 @@
                 android:id="@+id/textGeenAccount2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="@string/meerinfo_geen_account_text"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="@id/textGeenAccount"
                 app:layout_constraintTop_toBottomOf="@id/textGeenAccount" />
 
