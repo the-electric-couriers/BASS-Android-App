@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:background="@drawable/rounded_edges"
+        android:background="@drawable/rounded_edges_left"
         android:id="@+id/loginButton2"
         android:layout_width="350dp"
         android:layout_height="wrap_content"

@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
-            android:background="@drawable/rounded_edges"
+            android:background="@drawable/rounded_edges_left"
             android:id="@+id/loginButton1"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
