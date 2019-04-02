@@ -113,7 +113,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/rounded_edges"
+        android:background="@drawable/rounded_edges_left"
         android:fontFamily="@font/montserrat_medium"
         android:text="@string/login_main_button"
         android:textColor="@color/white"

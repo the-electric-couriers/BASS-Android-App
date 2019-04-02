@@ -55,7 +55,7 @@
             android:id="@+id/loginButton1"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_edges"
+            android:background="@drawable/rounded_edges_left"
             android:fontFamily="@font/montserrat_medium"
             android:onClick="onClickLoginButton1"
             android:text="@string/login_main_button"
