@@ -10,5 +10,7 @@ public final class Globals {
     public static final class PrefKeys {
         public static final String UTOKEN = "shared_preference_user_token_key";
         public static final String MAIN_USER = "shared_preference_user_key";
+        public static final String LROUTE_START = "shared_preference_last_route_start_location";
+        public static final String LROUTE_END = "shared_preference_last_route_end_location";
     }
 }

@@ -3,6 +3,9 @@ package com.electriccouriers.bass.interfaces;
 import com.electriccouriers.bass.models.History;
 import com.electriccouriers.bass.models.RoutePoint;
 import com.electriccouriers.bass.models.User;
+import com.google.gson.JsonElement;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +23,13 @@ public interface APIService {
     Call<User> login(@Field("email") String email, @Field("password") String password);
 
     @POST("route/points")
-    Call<List<RoutePoint>> routePoints(@Header("Authorization") String auth);
+    Call<ArrayList<RoutePoint>> routePoints(@Header("Authorization") String auth);
 
     @POST("user/history")
     @FormUrlEncoded
     Call<ArrayList<History>> routeHistory(@Header("Authorization") String auth, @Field("userID") Integer userID);
+
+    @POST("route/new")
+    @FormUrlEncoded
+    Call<JsonElement> requestRide(@Header("Authorization") String auth, @Field("userID") Integer userID, @Field("startPosition") Integer startPosition, @Field("endPosition") Integer endPosition);
 }
