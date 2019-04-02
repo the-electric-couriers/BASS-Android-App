@@ -49,8 +49,6 @@ public class User {
         this.companyName = companyName;
         this.routePointID = routePointID;
         this.accessCode = accessCode;
-
-        this.company = new Company(companyID, companyName, routePointID);
     }
 
     public Integer getUserID() {
@@ -103,6 +101,30 @@ public class User {
 
     public String getFullName() {
         return this.firstname + " " + this.lastname;
+    }
+
+    public Integer getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(Integer companyID) {
+        this.companyID = companyID;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public Integer getRoutePointID() {
+        return routePointID;
+    }
+
+    public void setRoutePointID(Integer routePointID) {
+        this.routePointID = routePointID;
     }
 
     public Company getCompany() {

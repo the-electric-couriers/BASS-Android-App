@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.animation.LinearInterpolator;
+import android.widget.LinearLayout;
 
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
 import com.electriccouriers.bass.helpers.API;
 import com.electriccouriers.bass.models.RoutePoint;
+import com.electriccouriers.bass.models.User;
 import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
@@ -49,7 +51,14 @@ public class HomeActivity extends BaseActivity {
 
     private static final String DOT_SOURCE_ID = "ic_shuttle";
 
+    private LinearLayout requestButtonLayout, cardButtonLayout;
+
     private int count = 0;
+    private double mapLat = 51.541519;
+    private double mapLong = 4.457777;
+    private double mapZoom = 13.3;
+    private long shuttleSpeed = 1000;
+
     private MapView mapView;
     private MapboxMap mapboxMap;
     private Handler handler;
@@ -66,42 +75,22 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mapView = findViewById(R.id.mapView);
+        requestButtonLayout = findViewById(R.id.layout_home_request);
+        cardButtonLayout = findViewById(R.id.layout_home_card);
+
+        requestButtonLayout.setOnClickListener(v -> onClickAanvragen());
+        cardButtonLayout.setOnClickListener(v -> onClickKaart());
+
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapboxMap -> {
             mapboxMap.setStyle(Style.LIGHT);
             mapboxMap.setCameraPosition(new CameraPosition.Builder()
-                    .target(new LatLng(51.541519, 4.457777))
-                    .zoom(14)
+                    .target(new LatLng(mapLat, mapLong))
+                    .zoom(mapZoom)
                     .build());
 
             HomeActivity.this.mapboxMap = mapboxMap;
             mapboxMap.setStyle(Style.LIGHT, style -> new LoadGeoJson(HomeActivity.this).execute());
-        });
-
-        findViewById(R.id.buttonAanvragen).setOnClickListener(v -> {
-            onClickAanvragen();
-        });
-
-        findViewById(R.id.buttonKaart).setOnClickListener(v -> {
-            onClickKaart();
-        });
-
-        // TEMP DEBUG CODE
-        API.service().routePoints(PreferenceHelper.read(this, Globals.PrefKeys.UTOKEN)).enqueue(new Callback<List<RoutePoint>>() {
-            @Override
-            public void onResponse(Call<List<RoutePoint>> call, Response<List<RoutePoint>> response) {
-                if(response.isSuccessful()) {
-                    System.out.println(response.body().size());
-                    System.out.println(response.body().get(0).getName());
-                } else {
-                    Log.e("ERROR", String.valueOf(response.code()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<RoutePoint>> call, Throwable t) {
-                Log.e("ERROR", t.getLocalizedMessage());
-            }
         });
     }
 
@@ -127,12 +116,10 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void onClickAanvragen(){
-        //TODO: onClickAanvragen knop functies toevoegen.
         openAcitivity(new Intent(HomeActivity.this, RequestActivity.class), true);
     }
 
     private void onClickKaart() {
-        //TODO: onClickKaart knop functies toevoegen.
         openAcitivity(new Intent(HomeActivity.this, CardActivity.class), true);
     }
 
@@ -171,11 +158,15 @@ public class HomeActivity extends BaseActivity {
                         markerIconAnimator.cancel();
                     }
 
-                    markerIconAnimator = ObjectAnimator.ofObject(latLngEvaluator, count == 0 ? new LatLng(51.541519, 4.457777): markerIconCurrentLocation, new LatLng(nextLocation.latitude(), nextLocation.longitude())).setDuration(1000);
-                    markerIconAnimator.setInterpolator(new LinearInterpolator());
+                    try {
+                        markerIconAnimator = ObjectAnimator.ofObject(latLngEvaluator, count == 0 ? new LatLng(mapLat, mapLong): markerIconCurrentLocation, new LatLng(nextLocation.latitude(), nextLocation.longitude())).setDuration(shuttleSpeed);
+                        markerIconAnimator.setInterpolator(new LinearInterpolator());
 
-                    markerIconAnimator.addUpdateListener(animatorUpdateListener);
-                    markerIconAnimator.start();
+                        markerIconAnimator.addUpdateListener(animatorUpdateListener);
+                        markerIconAnimator.start();
+                    } catch (Exception e) {
+                        return;
+                    }
 
                     count++;
 
@@ -183,7 +174,7 @@ public class HomeActivity extends BaseActivity {
                         count = 0;
                     }
 
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, shuttleSpeed);
                 }
             }
         };
