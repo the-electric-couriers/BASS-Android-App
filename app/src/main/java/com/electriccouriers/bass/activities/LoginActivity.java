@@ -123,9 +123,10 @@ public class LoginActivity extends BaseActivity {
         PreferenceHelper.save(this, Globals.PrefKeys.MAIN_USER, user.serialize());
         PreferenceHelper.save(this, Globals.PrefKeys.UTOKEN, "Token " + user.getToken());
 
-        System.out.println(user.serialize());
+        Intent homeActivity = new Intent(LoginActivity.this, HomeActivity.class);
+        homeActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
+        openAcitivity(homeActivity);
     }
 
     private void userLoginFailed() {
