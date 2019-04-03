@@ -3,19 +3,21 @@ package com.electriccouriers.bass.activities;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
-import com.electriccouriers.bass.helpers.API;
-import com.electriccouriers.bass.models.RoutePoint;
-import com.electriccouriers.bass.models.User;
+import com.electriccouriers.bass.fragments.CheckInSheetDialogFragment;
+import com.electriccouriers.bass.interfaces.CheckInDialogCloseListener;
 import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
@@ -38,20 +40,18 @@ import java.util.Scanner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements CheckInDialogCloseListener {
 
     private static final String DOT_SOURCE_ID = "ic_shuttle";
 
-    private LinearLayout requestButtonLayout, cardButtonLayout;
+    private LinearLayout requestButtonLayout, cardButtonLayout, currentRideButtonLayout, checkInButtonLayout;
+    private TextView currentRideButtonTitle, checkInButtonTitle;
 
     private int count = 0;
     private double mapLat = 51.541519;
@@ -76,10 +76,19 @@ public class HomeActivity extends BaseActivity {
 
         mapView = findViewById(R.id.mapView);
         requestButtonLayout = findViewById(R.id.layout_home_request);
+        currentRideButtonLayout = findViewById(R.id.layout_home_current_ride);
+        currentRideButtonTitle = findViewById(R.id.textview_home_ride_title);
+
         cardButtonLayout = findViewById(R.id.layout_home_card);
+        checkInButtonLayout = findViewById(R.id.layout_home_checkin);
+        checkInButtonTitle = findViewById(R.id.textview_home_checkin_title);
 
         requestButtonLayout.setOnClickListener(v -> onClickAanvragen());
         cardButtonLayout.setOnClickListener(v -> onClickKaart());
+        checkInButtonLayout.setOnClickListener(v -> {
+            CheckInSheetDialogFragment bottomDialog = new CheckInSheetDialogFragment();
+            bottomDialog.show(getSupportFragmentManager(), "fragment_checkin_dialog");
+        });
 
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapboxMap -> {
@@ -94,6 +103,15 @@ public class HomeActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        int currentRoute = PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_ID, 0);
+
+        if(currentRoute != 0)
+            currentRideHomeButtons();
+    }
 
     @Override
     protected int getLayoutResourceId() {
@@ -115,12 +133,27 @@ public class HomeActivity extends BaseActivity {
         return 0;
     }
 
+    @Override
+    public void onDialogClose(DialogInterface dialog) {
+        Log.e("test", "closed");
+    }
+
     public void onClickAanvragen(){
         openAcitivity(new Intent(HomeActivity.this, RequestActivity.class), true);
     }
 
     private void onClickKaart() {
         openAcitivity(new Intent(HomeActivity.this, CardActivity.class), true);
+    }
+
+    private void currentRideHomeButtons() {
+        currentRideButtonLayout.setVisibility(View.VISIBLE);
+        checkInButtonLayout.setVisibility(View.VISIBLE);
+
+        requestButtonLayout.setVisibility(View.GONE);
+        cardButtonLayout.setVisibility(View.GONE);
+
+        currentRideButtonTitle.setText("± " + PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_ATIME));
     }
 
     /**

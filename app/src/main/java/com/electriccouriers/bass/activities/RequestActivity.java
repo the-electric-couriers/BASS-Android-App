@@ -2,12 +2,14 @@ package com.electriccouriers.bass.activities;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
@@ -20,6 +22,7 @@ import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +36,7 @@ public class RequestActivity extends BaseActivity {
 
     private Integer selectedStartLocation, selectedEndLocation;
     private User mainUser;
+    private Calendar selectedTimestamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,21 +99,25 @@ public class RequestActivity extends BaseActivity {
 
 
         Calendar mcurrentTime = Calendar.getInstance();
-        Calendar tmp = (Calendar) mcurrentTime.clone();
-        tmp.add(Calendar.MINUTE, 15);
-        tmp.set(Calendar.AM_PM, 1);
+        selectedTimestamp = (Calendar) mcurrentTime.clone();
+        selectedTimestamp.add(Calendar.MINUTE, 15);
+        selectedTimestamp.set(Calendar.AM_PM, 1);
 
-        int hour = tmp.get(Calendar.HOUR_OF_DAY);
-        int minute = tmp.get(Calendar.MINUTE);
+        int hour = selectedTimestamp.get(Calendar.HOUR_OF_DAY);
+        int minute = selectedTimestamp.get(Calendar.MINUTE);
 
         findViewById(R.id.layout_request_time).setOnClickListener(v -> {
             TimePickerDialog mTimePicker;
-            mTimePicker = new TimePickerDialog(RequestActivity.this, (timePicker, selectedHour, selectedMinute) -> timeText.setText(selectedHour + ":" + selectedMinute), hour, minute, true);
+            mTimePicker = new TimePickerDialog(RequestActivity.this, (view, selectedHour, selectedMinute) -> {
+                timeText.setText(formatTime(selectedHour, selectedMinute));
+                selectedTimestamp.set(Calendar.HOUR_OF_DAY, selectedHour);
+                selectedTimestamp.set(Calendar.MINUTE, selectedMinute);
+            }, hour, minute, true);
             mTimePicker.setTitle("Selecteer een tijdstip");
             mTimePicker.show();
         });
 
-        timeText.setText(String.valueOf(hour) + ":" + String.valueOf(minute));
+        timeText.setText(formatTime(hour, minute));
 
         request = findViewById(R.id.requestbutton);
         request.setOnClickListener(v -> requestRide());
@@ -135,6 +143,20 @@ public class RequestActivity extends BaseActivity {
         return 0;
     }
 
+    private String formatTime(int hour, int minute) {
+        String hourString = String.valueOf(hour);
+        String minuteString = String.valueOf(minute);
+
+        if(hourString.length() == 1)
+            hourString = "0" + hourString;
+
+        if(minuteString.length() == 1)
+            minuteString = "0" + minuteString;
+
+
+        return hourString + ":" + minuteString;
+    }
+
     private void initLocations() {
         int lastStartLoc = PreferenceHelper.read(this, Globals.PrefKeys.LROUTE_START, 0);
         int lastEndLoc = PreferenceHelper.read(this, Globals.PrefKeys.LROUTE_END, 0);
@@ -157,17 +179,25 @@ public class RequestActivity extends BaseActivity {
     }
 
     private void rideSuccesful(Integer routeID) {
-        System.out.println(routeID);
-        ProgressDialogHelper.getInstance(this).hide();
-
         PreferenceHelper.save(this, Globals.PrefKeys.LROUTE_START, selectedStartLocation);
         PreferenceHelper.save(this, Globals.PrefKeys.LROUTE_END, selectedEndLocation);
+        PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ID, routeID);
+
+        selectedTimestamp.add(Calendar.MINUTE, 10);
+        int hour = selectedTimestamp.get(Calendar.HOUR_OF_DAY);
+        int minute = selectedTimestamp.get(Calendar.MINUTE);
+
+        PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ATIME, formatTime(hour, minute));
+
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            ProgressDialogHelper.getInstance(this).hide();
+            onBackPressed();
+        }, new Random().nextInt((1000 - 800) + 1) + 800);
     }
 
     private void requestRide() {
         ProgressDialogHelper.getInstance(this).show();
-        System.out.println(selectedStartLocation);
-        System.out.println(selectedEndLocation);
         API.service().requestRide(PreferenceHelper.read(this, Globals.PrefKeys.UTOKEN), mainUser.getUserID(), selectedStartLocation, selectedEndLocation).enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {

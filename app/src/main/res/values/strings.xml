@@ -46,6 +46,13 @@
     <string name="home_button_kaart">KAART</string>
     <string name="home_button_kaart_sub">Bekijk shuttle card</string>
 
+    <string name="home_button_ride_sub">als shuttle arriveert</string>
+    <string name="home_button_checkin">Inchecken</string>
+    <string name="home_button_checkout">Uitchecken</string>
+    <string name="home_button_checkin_sub">met shuttle card</string>
+
+    <string name="home_checkin_dialog_scan_title">Houd je telefoon\n tegen de scanner</string>
+
 
     <!-- Kaart Page -->
     <string name="kaart_image_description">Voorbeeld kaart van Nikki 2: The Reckoning</string>
@@ -68,5 +75,8 @@
 
     <!-- Profile Page -->
     <string name="profile_toolbar_title"></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bebasneue_bold"
-                android:text="@string/home_button_aanvragen"
+                android:text="@string/requestbutton"
                 android:textColor="@color/bass_grey"
                 android:textSize="28sp" />
 
@@ -94,6 +94,90 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_light"
                 android:text="@string/home_button_kaart_sub"
+                android:textColor="@color/bass_grey"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_home_current_ride"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/background_home_button_active"
+            android:elevation="8dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="450dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitStart"
+                android:tint="@color/appDefaultBackground"
+                app:srcCompat="@drawable/ic_clock" />
+
+            <TextView
+                android:id="@+id/textview_home_ride_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bebasneue_bold"
+                android:text="@string/home_button_aanvragen"
+                android:textColor="@color/appDefaultBackground"
+                android:textSize="28sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="@string/home_button_ride_sub"
+                android:textColor="@color/appDefaultBackground"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_home_checkin"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"
+            android:layout_marginStart="25dp"
+            android:background="@drawable/background_home_button"
+            android:elevation="8dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="450dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitStart"
+                android:tint="@color/bass_dark_apache"
+                app:srcCompat="@drawable/ic_wifi" />
+
+            <TextView
+                android:id="@+id/textview_home_checkin_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bebasneue_bold"
+                android:text="@string/home_button_checkin"
+                android:textColor="@color/bass_grey"
+                android:textSize="28sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="@string/home_button_checkin_sub"
                 android:textColor="@color/bass_grey"
                 android:textSize="12sp" />
         </LinearLayout>

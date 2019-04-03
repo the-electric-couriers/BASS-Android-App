@@ -79,3 +79,4 @@ lint/outputs/
 lint/tmp/
 lint/reports/
 .idea/modules.xml
+gradle.properties
