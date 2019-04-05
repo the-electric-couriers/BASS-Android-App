@@ -74,6 +74,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
 
         super.onCreate(savedInstanceState);
 
+        // Init layout elements
         mapView = findViewById(R.id.mapView);
         requestButtonLayout = findViewById(R.id.layout_home_request);
         currentRideButtonLayout = findViewById(R.id.layout_home_current_ride);
@@ -83,6 +84,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
         checkInButtonLayout = findViewById(R.id.layout_home_checkin);
         checkInButtonTitle = findViewById(R.id.textview_home_checkin_title);
 
+        // Button click listeners
         requestButtonLayout.setOnClickListener(v -> onClickAanvragen());
         cardButtonLayout.setOnClickListener(v -> onClickKaart());
         checkInButtonLayout.setOnClickListener(v -> {
@@ -90,6 +92,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
             bottomDialog.show(getSupportFragmentManager(), "fragment_checkin_dialog");
         });
 
+        // Creating mapview and applying light mapstyle
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapboxMap -> {
             mapboxMap.setStyle(Style.LIGHT);
@@ -109,6 +112,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
 
         int currentRoute = PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_ID, 0);
 
+        // Check if a current route is active, if so, update UI accordingly
         if(currentRoute != 0)
             currentRideHomeButtons();
     }
@@ -138,14 +142,77 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
         Log.e("test", "closed");
     }
 
-    public void onClickAanvragen(){
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+
+        if(handler != null && runnable != null) {
+            handler.post(runnable);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+
+        if(handler != null && runnable != null) {
+            handler.removeCallbacksAndMessages(null);
+        }
+
+        if(markerIconAnimator != null) {
+            markerIconAnimator.cancel();
+        }
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    /**
+     * Click handler for requesting ride
+     */
+    private void onClickAanvragen() {
         openAcitivity(new Intent(HomeActivity.this, RequestActivity.class), true);
     }
 
+    /**
+     * Click handler for requesting card
+     */
     private void onClickKaart() {
         openAcitivity(new Intent(HomeActivity.this, CardActivity.class), true);
     }
 
+    /**
+     * Update UI to show user current ride information and checkin option
+     */
     private void currentRideHomeButtons() {
         currentRideButtonLayout.setVisibility(View.VISIBLE);
         checkInButtonLayout.setVisibility(View.VISIBLE);
@@ -253,60 +320,9 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
         ));
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-
-        if(handler != null && runnable != null) {
-            handler.post(runnable);
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-
-        if(handler != null && runnable != null) {
-            handler.removeCallbacksAndMessages(null);
-        }
-
-        if(markerIconAnimator != null) {
-            markerIconAnimator.cancel();
-        }
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
+    /**
+     * Parsing local geojson dummy map data to simulate moving shuttle
+     */
     private static class LoadGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
         private WeakReference<HomeActivity> weakReference;
 
@@ -343,6 +359,9 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
         }
     }
 
+    /**
+     * Calculating lat long coordinates
+     */
     private static final TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
         private final LatLng latLng = new LatLng();
 

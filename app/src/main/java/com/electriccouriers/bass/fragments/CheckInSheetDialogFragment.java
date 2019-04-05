@@ -47,14 +47,18 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_checkin_dialog, container, false);
 
+        // Init layout elements
         ImageView kaartFront = view.findViewById(R.id.popup_imageKaart);
         spinner = view.findViewById(R.id.popup_cardProgressBar);
         nfcManager = new NfcManager(getActivity());
 
+        // Fetching main user object from storage
         User mainUser = User.create(PreferenceHelper.read(getContext(), Globals.PrefKeys.MAIN_USER));
+        // Assembling card image url
         String cardImageURL = Globals.API_BASEURL + "user/card/" + mainUser.getUserID() + "/" + mainUser.getFullName() + "/" + mainUser.getAccessCode();
         RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE);
 
+        // Fetching card image from URL and loading into imageview
         GlideUrl glideUrl = new GlideUrl(cardImageURL, new LazyHeaders.Builder()
                 .addHeader("Authorization", PreferenceHelper.read(getContext(), Globals.PrefKeys.UTOKEN)).build());
 
@@ -62,6 +66,7 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
 
         kaartFront.setOnClickListener(v -> dismiss());
 
+        // Init NFC manager and scanning
         nfcManager.onActivityCreate();
         nfcManager.setOnTagReadListener(tagRead -> {
             Log.d("NFC", tagRead);
@@ -88,6 +93,10 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
         return false;
     }
 
+    /**
+     * Interface method for dismissing dialog
+     * @param dialog
+     */
     public void onDismiss(DialogInterface dialog) {
         Activity activity = getActivity();
 
@@ -95,11 +104,20 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
             ((CheckInDialogCloseListener)activity).onDialogClose(dialog);
     }
 
+
+    /**
+     * Reading NFC message
+     * @param message
+     * @return
+     */
     private Boolean checkNFCTag(String message) {
         Log.d("PARTS", message);
         return true;
     }
 
+    /**
+     * Scanning NFC
+     */
     private void scanNFC() {
         Log.d("NFC", "NFC");
 
