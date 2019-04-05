@@ -1,7 +1,9 @@
 package com.electriccouriers.bass.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
+import com.electriccouriers.bass.helpers.NfcManager;
 import com.electriccouriers.bass.interfaces.CheckInDialogCloseListener;
 import com.electriccouriers.bass.models.User;
 import com.electriccouriers.bass.preferences.PreferenceHelper;
@@ -31,6 +34,9 @@ import androidx.annotation.Nullable;
 public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implements RequestListener {
 
     private ProgressBar spinner;
+    private NfcManager nfcManager;
+
+    private boolean NFCScanning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
 
         ImageView kaartFront = view.findViewById(R.id.popup_imageKaart);
         spinner = view.findViewById(R.id.popup_cardProgressBar);
+        nfcManager = new NfcManager(getActivity());
 
         User mainUser = User.create(PreferenceHelper.read(getContext(), Globals.PrefKeys.MAIN_USER));
         String cardImageURL = Globals.API_BASEURL + "user/card/" + mainUser.getUserID() + "/" + mainUser.getFullName() + "/" + mainUser.getAccessCode();
@@ -54,6 +61,18 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
         Glide.with(this).load(glideUrl).apply(options).listener(this).into(kaartFront);
 
         kaartFront.setOnClickListener(v -> dismiss());
+
+        nfcManager.onActivityCreate();
+        nfcManager.setOnTagReadListener(tagRead -> {
+            Log.d("NFC", tagRead);
+            if(NFCScanning) {
+                if(checkNFCTag(tagRead)) {
+
+                }
+
+                NFCScanning = false;
+            }
+        });
 
         return view;
     }
@@ -74,5 +93,20 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
 
         if(activity instanceof CheckInDialogCloseListener)
             ((CheckInDialogCloseListener)activity).onDialogClose(dialog);
+    }
+
+    private Boolean checkNFCTag(String message) {
+        Log.d("PARTS", message);
+        return true;
+    }
+
+    private void scanNFC() {
+        Log.d("NFC", "NFC");
+
+        android.nfc.NfcManager manager = (android.nfc.NfcManager) getContext().getSystemService(Context.NFC_SERVICE);
+        NfcAdapter adapter = manager.getDefaultAdapter();
+        if (adapter != null && adapter.isEnabled()) {
+            NFCScanning = true;
+        }
     }
 }
