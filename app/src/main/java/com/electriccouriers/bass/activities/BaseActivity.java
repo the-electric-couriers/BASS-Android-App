@@ -21,6 +21,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 /**
  * Created by Thomas Hopstaken on 16/01/17
  */
+
+/**
+ *  HELLO
+ */
+
 public abstract class BaseActivity extends AppCompatActivity implements
         View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
