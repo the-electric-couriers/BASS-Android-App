@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -78,17 +79,23 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
         // Init NFC manager and scanning
         nfcManager.onActivityCreate();
         nfcManager.setOnTagReadListener(tagRead -> {
-            Log.d("NFC", tagRead);
-            if(NFCScanning) {
-                if(checkNFCTag(tagRead)) {
-
-                }
-
-                NFCScanning = false;
-            }
+            Toast.makeText(getContext(), "tag read:" + tagRead, Toast.LENGTH_LONG).show();
+            checkIn();
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        nfcManager.onActivityResume();
+    }
+
+    @Override
+    public void onPause() {
+        nfcManager.onActivityPause();
+        super.onPause();
     }
 
     @Override
