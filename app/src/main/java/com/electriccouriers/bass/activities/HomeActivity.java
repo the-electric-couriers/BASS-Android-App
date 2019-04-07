@@ -3,6 +3,7 @@ package com.electriccouriers.bass.activities;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -87,6 +88,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
         // Button click listeners
         requestButtonLayout.setOnClickListener(v -> onClickAanvragen());
         cardButtonLayout.setOnClickListener(v -> onClickKaart());
+        currentRideButtonLayout.setOnClickListener(v -> cancelRide());
         checkInButtonLayout.setOnClickListener(v -> {
             CheckInSheetDialogFragment bottomDialog = new CheckInSheetDialogFragment();
             bottomDialog.show(getSupportFragmentManager(), "fragment_checkin_dialog");
@@ -139,7 +141,16 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
 
     @Override
     public void onDialogClose(DialogInterface dialog) {
-        Log.e("test", "closed");
+        Globals.RouteState routeState = Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0));
+
+        switch (routeState) {
+            case CHECKED:
+                checkInButtonTitle.setText(getString(R.string.home_button_checkout));
+                break;
+            case FINISHED:
+                PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ID, 0);
+                recreate();
+        }
     }
 
     @Override
@@ -221,6 +232,21 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
         cardButtonLayout.setVisibility(View.GONE);
 
         currentRideButtonTitle.setText("± " + PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_ATIME));
+
+        if(Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RouteState.CHECKED)
+            checkInButtonTitle.setText(getString(R.string.home_button_checkout));
+    }
+
+    private void cancelRide() {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.home_cancel_ride_title))
+                .setMessage(getString(R.string.home_cancel_ride_sub))
+                .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
+                    PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ID, 0);
+                    recreate();
+                })
+                .setNegativeButton(getString(R.string.no), null)
+                .show();
     }
 
     /**

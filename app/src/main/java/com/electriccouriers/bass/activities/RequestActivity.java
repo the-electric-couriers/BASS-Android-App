@@ -9,7 +9,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
@@ -178,10 +177,11 @@ public class RequestActivity extends BaseActivity {
         }
     }
 
-    private void rideSuccesful(Integer routeID) {
+    private void rideSuccessful(Integer routeID) {
         PreferenceHelper.save(this, Globals.PrefKeys.LROUTE_START, selectedStartLocation);
         PreferenceHelper.save(this, Globals.PrefKeys.LROUTE_END, selectedEndLocation);
         PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ID, routeID);
+        PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_STATE, Globals.RouteState.REQUESTED.ordinal());
 
         selectedTimestamp.add(Calendar.MINUTE, 10);
         int hour = selectedTimestamp.get(Calendar.HOUR_OF_DAY);
@@ -203,7 +203,7 @@ public class RequestActivity extends BaseActivity {
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                 assert response.body() != null;
                 if(response.isSuccessful() && response.body().getAsJsonObject().get("success").getAsBoolean()) {
-                    rideSuccesful(response.body().getAsJsonObject().get("routeID").getAsInt());
+                    rideSuccessful(response.body().getAsJsonObject().get("routeID").getAsInt());
                     return;
                 }
 

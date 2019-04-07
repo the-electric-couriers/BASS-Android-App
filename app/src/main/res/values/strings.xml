@@ -2,6 +2,8 @@
     <!-- GENERAL -->
     <string name="app_name">BASS</string>
     <string name="app_version">V1.0.1</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_MoreInfo">MoreInfoActivity</string>
@@ -52,6 +54,9 @@
     <string name="home_button_checkin_sub">met shuttle card</string>
 
     <string name="home_checkin_dialog_scan_title">Houd je telefoon\n tegen de scanner</string>
+
+    <string name="home_cancel_ride_title">Aanvraag annuleren</string>
+    <string name="home_cancel_ride_sub">Weet je zeker dat je deze rit wilt annuleren?</string>
 
 
     <!-- Kaart Page -->
