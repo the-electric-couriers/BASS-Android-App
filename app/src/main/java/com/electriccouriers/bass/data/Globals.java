@@ -18,12 +18,12 @@ public final class Globals {
         public static final String CROUTE_ATIME = "shared_preference_current_route_arrival_time";
     }
 
-    public enum RideState {
+    public enum RouteState {
         REQUESTED,
         CHECKED,
         FINISHED;
 
-        public static RideState fromInt(int x) {
+        public static RouteState fromInt(int x) {
             switch(x) {
                 case 0:
                     return REQUESTED;

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +24,21 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
+import com.electriccouriers.bass.helpers.API;
 import com.electriccouriers.bass.helpers.NfcManager;
+import com.electriccouriers.bass.helpers.ProgressDialogHelper;
 import com.electriccouriers.bass.interfaces.CheckInDialogCloseListener;
 import com.electriccouriers.bass.models.User;
 import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.gson.JsonElement;
+
+import java.util.Random;
 
 import androidx.annotation.Nullable;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implements RequestListener {
 
@@ -60,7 +69,7 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
 
         Glide.with(this).load(glideUrl).apply(options).listener(this).into(kaartFront);
 
-        kaartFront.setOnClickListener(v -> dismiss());
+        kaartFront.setOnClickListener(v -> checkIn());
 
         nfcManager.onActivityCreate();
         nfcManager.setOnTagReadListener(tagRead -> {
@@ -93,6 +102,43 @@ public class CheckInSheetDialogFragment extends BottomSheetDialogFragment implem
 
         if(activity instanceof CheckInDialogCloseListener)
             ((CheckInDialogCloseListener)activity).onDialogClose(dialog);
+    }
+
+    private void checkIn() {
+        ProgressDialogHelper.getInstance(getActivity()).show();
+
+        User mainUser = User.create(PreferenceHelper.read(getContext(), Globals.PrefKeys.MAIN_USER));
+        API.service().checkIn(PreferenceHelper.read(getContext(), Globals.PrefKeys.UTOKEN), mainUser.getUserID(), mainUser.getAccessCode(), PreferenceHelper.read(getContext(), Globals.PrefKeys.CROUTE_ID, 0)).enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                assert response.body() != null;
+                if(response.isSuccessful() && response.body().getAsJsonObject().get("success").getAsBoolean()) {
+                    checkInSuccessful();
+                    return;
+                }
+
+                Log.e("Error", response.message());
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                Log.e("Error", t.getLocalizedMessage());
+            }
+        });
+    }
+
+    private void checkInSuccessful() {
+        if(Globals.RouteState.fromInt(PreferenceHelper.read(getContext(), Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RouteState.REQUESTED) {
+            PreferenceHelper.save(getContext(), Globals.PrefKeys.CROUTE_STATE, Globals.RouteState.CHECKED.ordinal());
+        } else {
+            PreferenceHelper.save(getContext(), Globals.PrefKeys.CROUTE_STATE, Globals.RouteState.FINISHED.ordinal());
+        }
+
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            ProgressDialogHelper.getInstance(getActivity()).hide();
+            dismiss();
+        }, new Random().nextInt((1000 - 800) + 1) + 800);
     }
 
     private Boolean checkNFCTag(String message) {

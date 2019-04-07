@@ -137,8 +137,16 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
 
     @Override
     public void onDialogClose(DialogInterface dialog) {
-        if(Globals.RideState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RideState.CHECKED)
-            checkInButtonTitle.setText(getString(R.string.home_button_checkout));
+        Globals.RouteState routeState = Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0));
+
+        switch (routeState) {
+            case CHECKED:
+                checkInButtonTitle.setText(getString(R.string.home_button_checkout));
+                break;
+            case FINISHED:
+                PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ID, 0);
+                recreate();
+        }
     }
 
     public void onClickAanvragen(){
@@ -158,7 +166,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
 
         currentRideButtonTitle.setText("± " + PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_ATIME));
 
-        if(Globals.RideState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RideState.CHECKED)
+        if(Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RouteState.CHECKED)
             checkInButtonTitle.setText(getString(R.string.home_button_checkout));
     }
 

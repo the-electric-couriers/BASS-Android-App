@@ -32,4 +32,8 @@ public interface APIService {
     @POST("route/new")
     @FormUrlEncoded
     Call<JsonElement> requestRide(@Header("Authorization") String auth, @Field("userID") Integer userID, @Field("startPosition") Integer startPosition, @Field("endPosition") Integer endPosition);
+
+    @POST("route/checkIn")
+    @FormUrlEncoded
+    Call<JsonElement> checkIn(@Header("Authorization") String auth, @Field("userID") Integer userID, @Field("card") String cardID, @Field("routeID") Integer routeID);
 }
