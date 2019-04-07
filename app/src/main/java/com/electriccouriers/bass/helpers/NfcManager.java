@@ -32,7 +32,7 @@ public class NfcManager {
 
 	String writeText = null;
 
-	
+
 	public NfcManager(Activity activity) {
 		this.activity = activity;
 	}
@@ -72,7 +72,7 @@ public class NfcManager {
 		this.writeText = null;
 	}
 
-	
+
 	/**
 	 * To be executed on OnCreate of the activity
 	 * @return true if the device has nfc capabilities
@@ -110,7 +110,7 @@ public class NfcManager {
 	 * @param intent
 	 */
 	public void onActivityNewIntent(Intent intent) {
-		// TODO Check if the following line has any use 
+		// TODO Check if the following line has any use
 		// activity.setIntent(intent);
 		if (writeText == null)
 			readTagFromIntent(intent);
@@ -170,7 +170,7 @@ public class NfcManager {
 			try {
 				ndef.connect();
 			} catch (IOException e) {
-				throw new NFCWriteException(NFCErrorType.unknownError);
+				throw new NFCWriteException(NFCWriteException.NFCErrorType.unknownError);
 			}
 			// Make sure the tag is writable
 			if (!ndef.isWritable()) {
