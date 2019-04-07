@@ -49,6 +49,8 @@
     <string name="home_button_kaart_sub">Bekijk shuttle card</string>
 
     <string name="home_button_ride_sub">als shuttle arriveert</string>
+    <string name="home_button_ride_active">Onderweg</string>
+    <string name="home_button_ride_active_sub">naar eindlocatie</string>
     <string name="home_button_checkin">Inchecken</string>
     <string name="home_button_checkout">Uitchecken</string>
     <string name="home_button_checkin_sub">met shuttle card</string>

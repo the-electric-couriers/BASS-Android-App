@@ -52,7 +52,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
     private static final String DOT_SOURCE_ID = "ic_shuttle";
 
     private LinearLayout requestButtonLayout, cardButtonLayout, currentRideButtonLayout, checkInButtonLayout;
-    private TextView currentRideButtonTitle, checkInButtonTitle;
+    private TextView currentRideButtonTitle, currentRideButtonSub, checkInButtonTitle;
 
     private int count = 0;
     private double mapLat = 51.541519;
@@ -80,6 +80,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
         requestButtonLayout = findViewById(R.id.layout_home_request);
         currentRideButtonLayout = findViewById(R.id.layout_home_current_ride);
         currentRideButtonTitle = findViewById(R.id.textview_home_ride_title);
+        currentRideButtonSub = findViewById(R.id.textview_home_ride_sub);
 
         cardButtonLayout = findViewById(R.id.layout_home_card);
         checkInButtonLayout = findViewById(R.id.layout_home_checkin);
@@ -235,9 +236,14 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
 
         if(Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RouteState.CHECKED)
             checkInButtonTitle.setText(getString(R.string.home_button_checkout));
+            currentRideButtonTitle.setText(getString(R.string.home_button_ride_active));
+            currentRideButtonSub.setText(getString(R.string.home_button_ride_active_sub));
     }
 
     private void cancelRide() {
+        if(Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RouteState.CHECKED)
+            return;
+
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.home_cancel_ride_title))
                 .setMessage(getString(R.string.home_cancel_ride_sub))
