@@ -182,6 +182,7 @@ public class RequestActivity extends BaseActivity {
         PreferenceHelper.save(this, Globals.PrefKeys.LROUTE_START, selectedStartLocation);
         PreferenceHelper.save(this, Globals.PrefKeys.LROUTE_END, selectedEndLocation);
         PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ID, routeID);
+        PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_STATE, Globals.RideState.REQUESTED.ordinal());
 
         selectedTimestamp.add(Calendar.MINUTE, 10);
         int hour = selectedTimestamp.get(Calendar.HOUR_OF_DAY);

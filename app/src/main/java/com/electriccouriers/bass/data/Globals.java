@@ -13,7 +13,26 @@ public final class Globals {
 
         public static final String LROUTE_START = "shared_preference_last_route_start_location";
         public static final String LROUTE_END = "shared_preference_last_route_end_location";
+        public static final String CROUTE_STATE = "shared_preference_current_route_state";
         public static final String CROUTE_ID = "shared_preference_current_route_id";
         public static final String CROUTE_ATIME = "shared_preference_current_route_arrival_time";
+    }
+
+    public enum RideState {
+        REQUESTED,
+        CHECKED,
+        FINISHED;
+
+        public static RideState fromInt(int x) {
+            switch(x) {
+                case 0:
+                    return REQUESTED;
+                case 1:
+                    return CHECKED;
+                case 2:
+                    return FINISHED;
+            }
+            return null;
+        }
     }
 }
