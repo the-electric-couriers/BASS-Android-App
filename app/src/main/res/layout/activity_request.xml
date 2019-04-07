@@ -52,7 +52,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageKaart"
+            android:id="@+id/imageView_request_shuttle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:adjustViewBounds="false"

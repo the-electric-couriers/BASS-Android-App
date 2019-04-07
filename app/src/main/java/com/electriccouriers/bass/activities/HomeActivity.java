@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
 import com.electriccouriers.bass.fragments.CheckInSheetDialogFragment;
+import com.electriccouriers.bass.helpers.BackgroundSoundService;
 import com.electriccouriers.bass.interfaces.CheckInDialogCloseListener;
 import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.mapbox.geojson.FeatureCollection;
@@ -200,6 +201,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        stopService(new Intent(this, BackgroundSoundService.class));
     }
 
     @Override

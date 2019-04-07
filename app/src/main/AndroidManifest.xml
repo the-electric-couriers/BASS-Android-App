@@ -54,6 +54,9 @@
             android:name=".activities.ProfileActivity"
             android:label="@string/title_activities_profile"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <service
+            android:name=".helpers.BackgroundSoundService"
+            android:label="BackgroundSoundService" />
     </application>
 
 </manifest>

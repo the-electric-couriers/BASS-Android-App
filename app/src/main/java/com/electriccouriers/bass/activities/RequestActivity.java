@@ -1,18 +1,21 @@
 package com.electriccouriers.bass.activities;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
 import com.electriccouriers.bass.helpers.API;
+import com.electriccouriers.bass.helpers.BackgroundSoundService;
 import com.electriccouriers.bass.helpers.ProgressDialogHelper;
 import com.electriccouriers.bass.models.RoutePoint;
 import com.electriccouriers.bass.models.User;
@@ -31,11 +34,13 @@ public class RequestActivity extends BaseActivity {
 
     private Button request;
     private TextView beginLocationText, timeText, endLocationText;
+    private ImageView shuttleImage;
     private ArrayList<RoutePoint> routePoints = new ArrayList<>();
 
     private Integer selectedStartLocation, selectedEndLocation;
     private User mainUser;
     private Calendar selectedTimestamp;
+    private Integer clicks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +51,17 @@ public class RequestActivity extends BaseActivity {
         window.setStatusBarColor(getResources().getColor(R.color.bass_light_apache));
 
         mainUser = User.create(PreferenceHelper.read(this, Globals.PrefKeys.MAIN_USER));
+        clicks = 0;
 
         beginLocationText = findViewById(R.id.textview_request_begin_location);
         timeText = findViewById(R.id.textview_request_time);
         endLocationText = findViewById(R.id.textview_request_end_location);
+        shuttleImage = findViewById(R.id.imageView_request_shuttle);
 
         getRoutePoints();
         initLocations();
+
+        shuttleImage.setOnClickListener(v -> shuttleClickListener());
 
         findViewById(R.id.layout_request_begin_location).setOnClickListener(v -> {
             PopupMenu pm = new PopupMenu(RequestActivity.this, findViewById(R.id.layout_request_begin_location));
@@ -154,6 +163,18 @@ public class RequestActivity extends BaseActivity {
 
 
         return hourString + ":" + minuteString;
+    }
+
+    private void shuttleClickListener() {
+        if(clicks < 5) {
+            clicks += 1;
+        } else {
+            startService(new Intent(this, BackgroundSoundService.class));
+        }
+
+        System.out.println(clicks);
+
+
     }
 
     private void initLocations() {
