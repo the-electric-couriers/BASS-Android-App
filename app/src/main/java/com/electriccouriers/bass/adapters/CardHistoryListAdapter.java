@@ -38,7 +38,10 @@ public class CardHistoryListAdapter extends ArrayAdapter<History> {
         routePointTitle.setText(historyItem.getRoutePointName());
 
         TextView routeTime = convertView.findViewById(R.id.Card_Time);
-        routeTime.setText(historyItem.getTime());
+        System.out.println(historyItem.getTime());
+        StringBuilder b = new StringBuilder(historyItem.getTime());
+        b = new StringBuilder(b.substring(0, 5));
+        routeTime.setText(b.toString());
 
         TextView routeDate = convertView.findViewById(R.id.Card_Date);
         routeDate.setText(historyItem.getDate());
@@ -48,7 +51,7 @@ public class CardHistoryListAdapter extends ArrayAdapter<History> {
         if (io == 0){
             routeInOut.setText("in");
         } else if (io == 1) {
-            routeInOut.setText("out");
+            routeInOut.setText("uit");
         }
 
         ImageView routeType = convertView.findViewById(R.id.Card_Pictogram);
@@ -58,7 +61,6 @@ public class CardHistoryListAdapter extends ArrayAdapter<History> {
         } else if (t == 0){
             routeType.setImageResource(R.drawable.ic_home);
         }
-
 
         return convertView;
     }

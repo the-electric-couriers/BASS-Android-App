@@ -17,71 +17,107 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/welcomeInloggen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/bebasneue_bold"
+            android:text="@string/login_main_button"
+            android:textColor="#525252"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/loginButton2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/welcomeEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="-3dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/welcome_email_address"
+                android:textAllCaps="true"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="@id/welcomeInloggen"
+                app:layout_constraintTop_toBottomOf="@id/welcomeInloggen" />
+
+            <EditText
+                android:id="@+id/welcomeEmailVeld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_regular"
+                android:inputType="textEmailAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/welcomeEmail" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/welcomeWachtwoord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="-3dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/welcome_password"
+                android:textAllCaps="true"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="@id/welcomeEmailVeld"
+                app:layout_constraintTop_toBottomOf="@id/welcomeEmailVeld" />
+
+            <EditText
+                android:id="@+id/welcomeWachtwoordVeld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_regular"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/welcomeWachtwoord"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/welcomeWachtwoord" />
+        </LinearLayout>
+
+    </LinearLayout>
+
     <Button
-        android:background="@drawable/rounded_edges"
         android:id="@+id/loginButton2"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="54dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rounded_edges_left"
+        android:fontFamily="@font/montserrat_medium"
         android:text="@string/login_main_button"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@color/white"/>
-
-    <TextView
-        android:id="@+id/welcomeInloggen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/login_main_button"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/loginButton2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/welcomeEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/welcome_email_address"
-        app:layout_constraintLeft_toLeftOf="@id/welcomeInloggen"
-        app:layout_constraintTop_toBottomOf="@id/welcomeInloggen" />
-
-    <EditText
-        android:id="@+id/welcomeEmailVeld"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeEmail" />
-
-    <TextView
-        android:id="@+id/welcomeWachtwoord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/welcome_password"
-        app:layout_constraintLeft_toLeftOf="@id/welcomeEmailVeld"
-        app:layout_constraintTop_toBottomOf="@id/welcomeEmailVeld" />
-
-    <EditText
-        android:id="@+id/welcomeWachtwoordVeld"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/welcomeWachtwoord"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeWachtwoord" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

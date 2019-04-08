@@ -6,46 +6,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/startWelkom"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="90dp"
-        android:text="@string/login_welcome_title"
-        android:textSize="80sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/bass_grey"/>
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/startWelkomSub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:lines="2"
-        android:text="@string/login_welcome_sub"
-        android:textSize="22sp"
-        app:layout_constraintLeft_toLeftOf="@id/startWelkom"
-        app:layout_constraintTop_toBottomOf="@id/startWelkom" />
+        <TextView
+            android:id="@+id/startWelkom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-10dp"
+            android:fontFamily="@font/bebasneue_bold"
+            android:text="@string/login_welcome_title"
+            android:textColor="@color/bass_grey"
+            android:textSize="80sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/startWelkomSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:lines="2"
+            android:text="@string/login_welcome_sub"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="@id/startWelkom"
+            app:layout_constraintTop_toBottomOf="@id/startWelkom" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="40dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
-            android:background="@drawable/rounded_edges"
             android:id="@+id/loginButton1"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edges_left"
+            android:fontFamily="@font/montserrat_medium"
             android:onClick="onClickLoginButton1"
             android:text="@string/login_main_button"
-            app:layout_constraintRight_toRightOf="parent"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,9 +86,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="@string/login_more_info"
+                android:textColor="@color/bass_light_apache"
                 app:layout_constraintLeft_toRightOf="@id/startNogGeen"
-                app:layout_constraintTop_toTopOf="@id/startNogGeen"
-                android:textColor="@color/bass_light_apache"/>
+                app:layout_constraintTop_toTopOf="@id/startNogGeen" />
 
         </LinearLayout>
     </LinearLayout>

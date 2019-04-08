@@ -82,13 +82,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:textColor="@color/dark_grey"
-        android:textSize="12sp"
         android:id="@+id/cardTxtGeschiedenis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_light"
         android:text="@string/kaart_geschiedenis"
+        android:textColor="@color/dark_grey"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/listview_card_history"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_card" />
@@ -97,94 +99,14 @@
         android:id="@+id/listview_card_history"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="15dp"
+        android:divider="@null"
+        android:dividerHeight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_card" />
 
-    <!--<ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_card">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/kaartViewRecord1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record1_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record2_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record3_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record1_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record2_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record3_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record1_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record2_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record3_voorbeeld"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/kaartViewRecord10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kaart_record1_voorbeeld"
-                android:textSize="26sp" />
-        </LinearLayout>
-    </ScrollView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

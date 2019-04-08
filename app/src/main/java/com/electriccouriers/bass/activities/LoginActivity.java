@@ -61,24 +61,27 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void onClickLoginButton2() {
-
         VerifyEmail verifyEmail = new VerifyEmail();
+        boolean error = false;
 
-        if(email.getText().toString().isEmpty()) {
+        if (email.getText().toString().isEmpty()) {
             email.setError(getString(R.string.login_leeg_email_bericht));
-            showError(getString(R.string.login_leeg_email_bericht));
+            error = true;
+        }
+
+        if (password.getText().toString().isEmpty()) {
+            password.setError(getString(R.string.login_leeg_password));
+            error = true;
+        }
+
+        if (error) {
+            showError(getString(R.string.login_form_error));
             return;
         }
 
-        if(!verifyEmail.verify(email.getText().toString())) {
+        if (!verifyEmail.verify(email.getText().toString())) {
             email.setError(getString(R.string.login_verkeerd_email_bericht));
             showError(getString(R.string.login_verkeerd_email_bericht));
-            return;
-        }
-
-        if(password.getText().toString().isEmpty()) {
-            password.setError(getString(R.string.login_leeg_password));
-            showError(getString(R.string.login_leeg_password));
             return;
         }
 
@@ -93,13 +96,14 @@ public class LoginActivity extends BaseActivity {
         API.service().login(emailString, passwordString).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     userLoginFailed();
                     return;
                 }
 
                 User responseUser = response.body();
-                if(responseUser.getToken() == null) {
+                responseUser.setCompany(new Company(responseUser.getCompanyID(), responseUser.getCompanyName(), responseUser.getRoutePointID()));
+                if (responseUser.getToken() == null) {
                     userLoginFailed();
                     return;
                 }
@@ -119,23 +123,17 @@ public class LoginActivity extends BaseActivity {
         PreferenceHelper.save(this, Globals.PrefKeys.MAIN_USER, user.serialize());
         PreferenceHelper.save(this, Globals.PrefKeys.UTOKEN, "Token " + user.getToken());
 
-        openAcitivity(new Intent(LoginActivity.this, HomeActivity.class));
+        Intent homeActivity = new Intent(LoginActivity.this, HomeActivity.class);
+        homeActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        openAcitivity(homeActivity);
     }
 
     private void userLoginFailed() {
-        EditText usernameEditText = (EditText) findViewById(R.id.welcomeEmailVeld);
-        EditText passwordEditText = (EditText) findViewById(R.id.welcomeWachtwoordVeld);
-
-            String emailString = email.getText().toString();
-            String passwordString = password.getText().toString();
-
-            if(usernameEditText == null || passwordEditText == null) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Foutmelding")
-                        .setMessage("Uw email en/of wachtwoord wordt niet herkend.")
-                        .show();
-            }
-        }
+        new AlertDialog.Builder(this)
+                .setTitle("Foutmelding")
+                .setMessage("Uw email en/of wachtwoord wordt niet herkend.")
+                .show();
 
     }
-
+}

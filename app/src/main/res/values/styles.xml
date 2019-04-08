@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/appDefaultBackground</item>
         <item name="colorAccent">@color/bass_light_apache</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -20,6 +22,16 @@
 
     <style name="MainToolbar">
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_card_top</item>
     </style>
 
 </resources>

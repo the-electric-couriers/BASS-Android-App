@@ -3,17 +3,23 @@ package com.electriccouriers.bass.activities;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.electriccouriers.bass.R;
 import com.electriccouriers.bass.data.Globals;
-import com.electriccouriers.bass.helpers.API;
-import com.electriccouriers.bass.models.RoutePoint;
+import com.electriccouriers.bass.fragments.CheckInSheetDialogFragment;
+import com.electriccouriers.bass.helpers.BackgroundSoundService;
+import com.electriccouriers.bass.interfaces.CheckInDialogCloseListener;
 import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
@@ -36,20 +42,25 @@ import java.util.Scanner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements CheckInDialogCloseListener {
 
     private static final String DOT_SOURCE_ID = "ic_shuttle";
 
+    private LinearLayout requestButtonLayout, cardButtonLayout, currentRideButtonLayout, checkInButtonLayout;
+    private TextView currentRideButtonTitle, currentRideButtonSub, checkInButtonTitle;
+
     private int count = 0;
+    private double mapLat = 51.541519;
+    private double mapLong = 4.457777;
+    private double mapZoom = 13.3;
+    private long shuttleSpeed = 1000;
+
     private MapView mapView;
     private MapboxMap mapboxMap;
     private Handler handler;
@@ -65,46 +76,50 @@ public class HomeActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
 
+        // Init layout elements
         mapView = findViewById(R.id.mapView);
+        requestButtonLayout = findViewById(R.id.layout_home_request);
+        currentRideButtonLayout = findViewById(R.id.layout_home_current_ride);
+        currentRideButtonTitle = findViewById(R.id.textview_home_ride_title);
+        currentRideButtonSub = findViewById(R.id.textview_home_ride_sub);
+
+        cardButtonLayout = findViewById(R.id.layout_home_card);
+        checkInButtonLayout = findViewById(R.id.layout_home_checkin);
+        checkInButtonTitle = findViewById(R.id.textview_home_checkin_title);
+
+        // Button click listeners
+        requestButtonLayout.setOnClickListener(v -> onClickAanvragen());
+        cardButtonLayout.setOnClickListener(v -> onClickKaart());
+        currentRideButtonLayout.setOnClickListener(v -> cancelRide());
+        checkInButtonLayout.setOnClickListener(v -> {
+            CheckInSheetDialogFragment bottomDialog = new CheckInSheetDialogFragment();
+            bottomDialog.show(getSupportFragmentManager(), "fragment_checkin_dialog");
+        });
+
+        // Creating mapview and applying light mapstyle
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapboxMap -> {
             mapboxMap.setStyle(Style.LIGHT);
             mapboxMap.setCameraPosition(new CameraPosition.Builder()
-                    .target(new LatLng(51.541519, 4.457777))
-                    .zoom(14)
+                    .target(new LatLng(mapLat, mapLong))
+                    .zoom(mapZoom)
                     .build());
 
             HomeActivity.this.mapboxMap = mapboxMap;
             mapboxMap.setStyle(Style.LIGHT, style -> new LoadGeoJson(HomeActivity.this).execute());
         });
-
-        findViewById(R.id.buttonAanvragen).setOnClickListener(v -> {
-            onClickAanvragen();
-        });
-
-        findViewById(R.id.buttonKaart).setOnClickListener(v -> {
-            onClickKaart();
-        });
-
-        // TEMP DEBUG CODE
-        API.service().routePoints(PreferenceHelper.read(this, Globals.PrefKeys.UTOKEN)).enqueue(new Callback<List<RoutePoint>>() {
-            @Override
-            public void onResponse(Call<List<RoutePoint>> call, Response<List<RoutePoint>> response) {
-                if(response.isSuccessful()) {
-                    System.out.println(response.body().size());
-                    System.out.println(response.body().get(0).getName());
-                } else {
-                    Log.e("ERROR", String.valueOf(response.code()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<RoutePoint>> call, Throwable t) {
-                Log.e("ERROR", t.getLocalizedMessage());
-            }
-        });
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        int currentRoute = PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_ID, 0);
+
+        // Check if a current route is active, if so, update UI accordingly
+        if(currentRoute != 0)
+            currentRideHomeButtons();
+    }
 
     @Override
     protected int getLayoutResourceId() {
@@ -126,107 +141,18 @@ public class HomeActivity extends BaseActivity {
         return 0;
     }
 
-    public void onClickAanvragen(){
-        //TODO: onClickAanvragen knop functies toevoegen.
-        openAcitivity(new Intent(HomeActivity.this, RequestActivity.class), true);
-    }
+    @Override
+    public void onDialogClose(DialogInterface dialog) {
+        Globals.RouteState routeState = Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0));
 
-    private void onClickKaart() {
-        //TODO: onClickKaart knop functies toevoegen.
-        openAcitivity(new Intent(HomeActivity.this, CardActivity.class), true);
-    }
-
-    /**
-     * Add data to the map once the GeoJSON has been loaded
-     * @param featureCollection returned GeoJSON FeatureCollection from the async task
-     */
-    private void initData(@NonNull FeatureCollection featureCollection) {
-        LineString lineString = (LineString) featureCollection.features().get(0).geometry();
-        routeCoordinateList = lineString.coordinates();
-
-        if(mapboxMap != null) {
-            Style style = mapboxMap.getStyle();
-
-            if(style != null) {
-                initSources(style, featureCollection);
-                initSymbolLayer(style);
-                initRunnable();
-            }
+        switch (routeState) {
+            case CHECKED:
+                checkInButtonTitle.setText(getString(R.string.home_button_checkout));
+                break;
+            case FINISHED:
+                PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ID, 0);
+                recreate();
         }
-    }
-
-    /**
-     * Set up the repeat logic for moving the icon along the route.
-     */
-    private void initRunnable() {
-        handler = new Handler();
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                if(routeCoordinateList.size() - 1 > count) {
-                    Point nextLocation = routeCoordinateList.get(count + 1);
-
-                    if(markerIconAnimator != null && markerIconAnimator.isStarted()) {
-                        markerIconCurrentLocation = (LatLng) markerIconAnimator.getAnimatedValue();
-                        markerIconAnimator.cancel();
-                    }
-
-                    markerIconAnimator = ObjectAnimator.ofObject(latLngEvaluator, count == 0 ? new LatLng(51.541519, 4.457777): markerIconCurrentLocation, new LatLng(nextLocation.latitude(), nextLocation.longitude())).setDuration(1000);
-                    markerIconAnimator.setInterpolator(new LinearInterpolator());
-
-                    markerIconAnimator.addUpdateListener(animatorUpdateListener);
-                    markerIconAnimator.start();
-
-                    count++;
-
-                    if(routeCoordinateList.size() - 1 == count) {
-                        count = 0;
-                    }
-
-                    handler.postDelayed(this, 1000);
-                }
-            }
-        };
-
-        handler.post(runnable);
-    }
-
-    /**
-     * Listener interface for when the ValueAnimator provides an updated value
-     */
-    private final ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
-            new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    LatLng animatedPosition = (LatLng) valueAnimator.getAnimatedValue();
-                    if (dotGeoJsonSource != null) {
-                        dotGeoJsonSource.setGeoJson(Point.fromLngLat(
-                                animatedPosition.getLongitude(), animatedPosition.getLatitude()));
-                    }
-                }
-            };
-
-    /**
-     * Add various sources to the map.
-     */
-    private void initSources(@NonNull Style loadedMapStyle, @NonNull FeatureCollection featureCollection) {
-        dotGeoJsonSource = new GeoJsonSource(DOT_SOURCE_ID, featureCollection);
-        loadedMapStyle.addSource(dotGeoJsonSource);
-    }
-
-    /**
-     * Add the marker icon SymbolLayer.
-     */
-    private void initSymbolLayer(@NonNull Style loadedMapStyle) {
-        loadedMapStyle.addImage("ic_shuttle", Objects.requireNonNull(BitmapUtils.getBitmapFromDrawable(
-                getResources().getDrawable(R.drawable.ic_shuttle))));
-
-        loadedMapStyle.addLayer(new SymbolLayer("symbol-layer-id", DOT_SOURCE_ID).withProperties(
-                iconImage("ic_shuttle"),
-                iconSize(0.5f),
-                iconIgnorePlacement(true),
-                iconAllowOverlap(true)
-        ));
     }
 
     @Override
@@ -275,6 +201,7 @@ public class HomeActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        stopService(new Intent(this, BackgroundSoundService.class));
     }
 
     @Override
@@ -283,6 +210,153 @@ public class HomeActivity extends BaseActivity {
         mapView.onSaveInstanceState(outState);
     }
 
+    /**
+     * Click handler for requesting ride
+     */
+    private void onClickAanvragen() {
+        openAcitivity(new Intent(HomeActivity.this, RequestActivity.class), true);
+    }
+
+    /**
+     * Click handler for requesting card
+     */
+    private void onClickKaart() {
+        openAcitivity(new Intent(HomeActivity.this, CardActivity.class), true);
+    }
+
+    /**
+     * Update UI to show user current ride information and checkin option
+     */
+    private void currentRideHomeButtons() {
+        currentRideButtonLayout.setVisibility(View.VISIBLE);
+        checkInButtonLayout.setVisibility(View.VISIBLE);
+
+        requestButtonLayout.setVisibility(View.GONE);
+        cardButtonLayout.setVisibility(View.GONE);
+
+        currentRideButtonTitle.setText("± " + PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_ATIME));
+
+        if(Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RouteState.CHECKED)
+            checkInButtonTitle.setText(getString(R.string.home_button_checkout));
+            currentRideButtonTitle.setText(getString(R.string.home_button_ride_active));
+            currentRideButtonSub.setText(getString(R.string.home_button_ride_active_sub));
+    }
+
+    private void cancelRide() {
+        if(Globals.RouteState.fromInt(PreferenceHelper.read(this, Globals.PrefKeys.CROUTE_STATE, 0)) == Globals.RouteState.CHECKED)
+            return;
+
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.home_cancel_ride_title))
+                .setMessage(getString(R.string.home_cancel_ride_sub))
+                .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
+                    PreferenceHelper.save(this, Globals.PrefKeys.CROUTE_ID, 0);
+                    recreate();
+                })
+                .setNegativeButton(getString(R.string.no), null)
+                .show();
+    }
+
+    /**
+     * Add data to the map once the GeoJSON has been loaded
+     * @param featureCollection returned GeoJSON FeatureCollection from the async task
+     */
+    private void initData(@NonNull FeatureCollection featureCollection) {
+        LineString lineString = (LineString) featureCollection.features().get(0).geometry();
+        routeCoordinateList = lineString.coordinates();
+
+        if(mapboxMap != null) {
+            Style style = mapboxMap.getStyle();
+
+            if(style != null) {
+                initSources(style, featureCollection);
+                initSymbolLayer(style);
+                initRunnable();
+            }
+        }
+    }
+
+    /**
+     * Set up the repeat logic for moving the icon along the route.
+     */
+    private void initRunnable() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                if(routeCoordinateList.size() - 1 > count) {
+                    Point nextLocation = routeCoordinateList.get(count + 1);
+
+                    if(markerIconAnimator != null && markerIconAnimator.isStarted()) {
+                        markerIconCurrentLocation = (LatLng) markerIconAnimator.getAnimatedValue();
+                        markerIconAnimator.cancel();
+                    }
+
+                    try {
+                        markerIconAnimator = ObjectAnimator.ofObject(latLngEvaluator, count == 0 ? new LatLng(mapLat, mapLong): markerIconCurrentLocation, new LatLng(nextLocation.latitude(), nextLocation.longitude())).setDuration(shuttleSpeed);
+                        markerIconAnimator.setInterpolator(new LinearInterpolator());
+
+                        markerIconAnimator.addUpdateListener(animatorUpdateListener);
+                        markerIconAnimator.start();
+                    } catch (Exception e) {
+                        return;
+                    }
+
+                    count++;
+
+                    if(routeCoordinateList.size() - 1 == count) {
+                        count = 0;
+                    }
+
+                    handler.postDelayed(this, shuttleSpeed);
+                }
+            }
+        };
+
+        handler.post(runnable);
+    }
+
+    /**
+     * Listener interface for when the ValueAnimator provides an updated value
+     */
+    private final ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
+            new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    LatLng animatedPosition = (LatLng) valueAnimator.getAnimatedValue();
+                    if (dotGeoJsonSource != null) {
+                        dotGeoJsonSource.setGeoJson(Point.fromLngLat(
+                                animatedPosition.getLongitude(), animatedPosition.getLatitude()));
+                    }
+                }
+            };
+
+    /**
+     * Add various sources to the map.
+     */
+    private void initSources(@NonNull Style loadedMapStyle, @NonNull FeatureCollection featureCollection) {
+        dotGeoJsonSource = new GeoJsonSource(DOT_SOURCE_ID, featureCollection);
+        loadedMapStyle.addSource(dotGeoJsonSource);
+    }
+
+    /**
+     * Add the marker icon SymbolLayer.
+     */
+    private void initSymbolLayer(@NonNull Style loadedMapStyle) {
+        loadedMapStyle.addImage("ic_shuttle", Objects.requireNonNull(BitmapUtils.getBitmapFromDrawable(
+                getResources().getDrawable(R.drawable.ic_shuttle))));
+
+        loadedMapStyle.addLayer(new SymbolLayer("symbol-layer-id", DOT_SOURCE_ID).withProperties(
+                iconImage("ic_shuttle"),
+                iconSize(0.5f),
+                iconIgnorePlacement(true),
+                iconAllowOverlap(true)
+        ));
+    }
+
+    /**
+     * Parsing local geojson dummy map data to simulate moving shuttle
+     */
     private static class LoadGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
         private WeakReference<HomeActivity> weakReference;
 
@@ -319,6 +393,9 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Calculating lat long coordinates
+     */
     private static final TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
         private final LatLng latLng = new LatLng();
 

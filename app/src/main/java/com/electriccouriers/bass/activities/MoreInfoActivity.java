@@ -22,12 +22,12 @@ public class MoreInfoActivity extends BaseActivity{
 
     @Override
     protected int getToolbarTitle() {
-        return 0;
+        return R.string.meerinfo_toolbar_title;
     }
 
     @Override
     protected int getToolbarNavigationIcon() {
-        return 0;
+        return R.drawable.ic_back_black;
     }
 
     @Override

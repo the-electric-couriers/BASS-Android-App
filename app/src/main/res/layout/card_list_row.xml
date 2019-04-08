@@ -2,55 +2,97 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/Card_Pictogram"
-        android:layout_width="140px"
-        android:layout_height="140px"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:tint="@color/bass_light_apache"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_home" />
-
-    <TextView
-        android:id="@+id/Card_StationName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="Station Roosendaal"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/Card_Pictogram"
-        app:layout_constraintTop_toTopOf="@+id/Card_Pictogram" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/Card_Time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="8:15"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Card_Pictogram" />
+        <ImageView
+            android:id="@+id/Card_Pictogram"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:tint="@color/bass_light_apache"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_home" />
 
-    <TextView
-        android:id="@+id/Card_Date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="25-3-2019"
-        app:layout_constraintStart_toEndOf="@+id/Card_Pictogram"
-        app:layout_constraintTop_toBottomOf="@+id/Card_StationName" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@+id/Card_Pictogram"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/Card_InOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="In"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Card_StationName" />
+            <TextView
+                android:id="@+id/Card_StationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/bebasneue_bold"
+                android:text="Station Roosendaal"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/Card_Pictogram"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/Card_Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="25-3-2019"
+                android:textAllCaps="true"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/Card_Pictogram"
+                app:layout_constraintTop_toBottomOf="@+id/Card_StationName" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/Card_Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/bebasneue_bold"
+                android:text="8:15"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/Card_StationName" />
+
+            <TextView
+                android:id="@+id/Card_InOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="In"
+                android:textAlignment="viewEnd"
+                android:textAllCaps="true"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Card_Time" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
