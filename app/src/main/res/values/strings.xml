@@ -23,10 +23,7 @@
     <string name="login_leeg_password">Vul uw wachtwoord in</string>
     <string name="login_form_error">Controleer uw gegevens</string>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> b812b8012ff25b322dc6eff052b8f99e81cdc899
     <!-- Welcome Page -->
     <string name="welcome_email_address">Email</string>
     <string name="welcome_password">Wachtwoord</string>
