@@ -4,6 +4,10 @@ import android.os.Bundle;
 
 import com.electriccouriers.bass.R;
 
+/**
+ * Created by Tan Bui on 31/03/2019
+ */
+
 public class ProfileActivity extends BaseActivity {
 
     @Override

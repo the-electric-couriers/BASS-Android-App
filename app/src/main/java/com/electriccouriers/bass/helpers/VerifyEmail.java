@@ -1,5 +1,9 @@
 package com.electriccouriers.bass.helpers;
 
+/**
+ * Created by Tan Bui on 31/03/2019
+ */
+
 public class VerifyEmail {
 
     public boolean verify(String email) {
