@@ -212,6 +212,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
 
     /**
      * Click handler for requesting ride
+     * Geschreven door nikki valkenburg
      */
     private void onClickAanvragen() {
         openAcitivity(new Intent(HomeActivity.this, RequestActivity.class), true);
@@ -219,6 +220,7 @@ public class HomeActivity extends BaseActivity implements CheckInDialogCloseList
 
     /**
      * Click handler for requesting card
+     * Geschreven door Nikki Valkenburg
      */
     private void onClickKaart() {
         openAcitivity(new Intent(HomeActivity.this, CardActivity.class), true);

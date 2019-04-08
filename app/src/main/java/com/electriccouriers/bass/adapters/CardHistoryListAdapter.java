@@ -37,6 +37,10 @@ public class CardHistoryListAdapter extends ArrayAdapter<History> {
         TextView routePointTitle = convertView.findViewById(R.id.Card_StationName);
         routePointTitle.setText(historyItem.getRoutePointName());
 
+        /**
+         *Geschreven door Nikki Valkenburg en Thomas Hopstaken
+         */
+
         TextView routeTime = convertView.findViewById(R.id.Card_Time);
         System.out.println(historyItem.getTime());
         StringBuilder b = new StringBuilder(historyItem.getTime());

@@ -7,6 +7,10 @@ import com.electriccouriers.bass.R;
 
 import androidx.annotation.NonNull;
 
+/**
+ * geschreven door nikki valkenburg
+ */
+
 public class MoreInfoActivity extends BaseActivity{
 
     @Override

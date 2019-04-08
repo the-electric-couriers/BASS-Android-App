@@ -60,6 +60,14 @@ public class LoginActivity extends BaseActivity {
         return false;
     }
 
+    /**
+     *Geschreven door Nikki Valkenburg
+     * Onclicklistener die word gebruikt om login informatie te controleren.
+     * een paar simpele if statements om te controleren of data is ingevuld.
+     * verifyEmail is geschreven door Tan Bui
+     * valideUserCredentials(); is geschreven door Thomas Hopstaken
+     */
+
     public void onClickLoginButton2() {
         VerifyEmail verifyEmail = new VerifyEmail();
         boolean error = false;

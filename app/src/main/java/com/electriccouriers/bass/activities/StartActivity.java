@@ -7,6 +7,10 @@ import android.view.View;
 
 import com.electriccouriers.bass.R;
 
+/**
+ *Geschreven door nikki Valkenburg
+ */
+
 public class StartActivity extends BaseActivity {
 
     @Override
