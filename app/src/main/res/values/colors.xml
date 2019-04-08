@@ -4,8 +4,15 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="white">#FFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="black">#000</color>
+    <color name="transparant">#00000000</color>
+
+    <color name="light_grey">#D3D3D3</color>
+    <color name="dark_grey">#545454</color>
+    <color name="bass_grey">#525252</color>
+    <color name="bass_dark_apache">#CFA160</color>
+    <color name="bass_light_apache">#E4BA67</color>
 
     <color name="appDefaultBackground">#FAFAFA</color>
 </resources>

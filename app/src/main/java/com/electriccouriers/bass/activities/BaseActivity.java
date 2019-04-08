@@ -2,15 +2,20 @@ package com.electriccouriers.bass.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.electriccouriers.bass.preferences.PreferenceHelper;
 import com.google.android.material.navigation.NavigationView;
 import com.electriccouriers.bass.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 /**
@@ -27,7 +32,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public Toolbar toolbar;
 
     private DrawerLayout menuDrawerLayout;
-    private NavigationView menuNavigationView;
 
     /**
      * OnCreate override to init Activity
@@ -37,9 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
 
-//        toolbar = findViewById(R.id.toolbar);
-//        menuDrawerLayout = findViewById(R.id.home_drawer_layout);
-//        menuNavigationView = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
+        menuDrawerLayout = findViewById(R.id.drawer_layout);
 
         if(toolbar != null) {
             toolbar.setTitle(getToolbarTitle());
@@ -49,8 +52,12 @@ public abstract class BaseActivity extends AppCompatActivity implements
             toolbar.setNavigationOnClickListener(this);
         }
 
-        if(menuNavigationView != null)
-            menuNavigationView.setNavigationItemSelectedListener(this);
+        if(menuDrawerLayout != null) {
+            // Menu click listeners block
+            findViewById(R.id.menu_home_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_home_item));
+            findViewById(R.id.menu_profile_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_profile_item));
+            findViewById(R.id.menu_logout_item).setOnClickListener(v -> onMenuItemSelected(R.id.menu_logout_item));
+        }
     }
 
     /**
@@ -87,7 +94,12 @@ public abstract class BaseActivity extends AppCompatActivity implements
      */
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if(menuDrawerLayout != null && menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            menuDrawerLayout.closeDrawer(GravityCompat.START, true);
+        } else {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
     }
 
     /**
@@ -154,14 +166,46 @@ public abstract class BaseActivity extends AppCompatActivity implements
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
+    public void showError(String error) {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), error, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    /**
+     * Open the menu drawer
+     */
+    private void onMenuItemSelected(int menuItem) {
+        switch (menuItem) {
+            case R.id.menu_logout_item:
+                logout();
+                break;
+            case R.id.menu_profile_item:
+                openAcitivity(new Intent(this, ProfileActivity.class), true);
+                break;
+            default:
+                break;
+        }
+
+        openMenu();
+    }
+
     /**
      * Open the menu drawer
      */
     private void openMenu() {
-        if(menuDrawerLayout.isDrawerOpen(menuNavigationView)) {
-            menuDrawerLayout.closeDrawer(menuNavigationView);
+        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            menuDrawerLayout.closeDrawer(GravityCompat.START, true);
         } else {
-            menuDrawerLayout.openDrawer(menuNavigationView);
+            menuDrawerLayout.openDrawer(GravityCompat.START, true);
         }
+    }
+
+    /**
+     * Logout current user
+     */
+    private void logout() {
+        PreferenceHelper.clearAll(this);
+        openAcitivity(new Intent(BaseActivity.this, StartActivity.class));
+        finish();
     }
 }

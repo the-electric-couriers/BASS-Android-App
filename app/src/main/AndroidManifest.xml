@@ -4,6 +4,12 @@
     package="com.electriccouriers.bass">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="false" />
 
     <application
         android:allowBackup="false"
@@ -11,9 +17,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity android:name=".activities.InitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +27,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".activities.StartActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.MoreInfoActivity"
+            android:label="@string/title_activity_MoreInfo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.CardActivity"
+            android:label="@string/title_activities_card"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.RequestActivity"
+            android:label="@string/title_activities_card"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:label="@string/title_activities_profile"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <service
+            android:name=".helpers.BackgroundSoundService"
+            android:label="BackgroundSoundService" />
     </application>
 
 </manifest>
