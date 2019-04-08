@@ -20,8 +20,6 @@
     <string name="login_leeg_password">Vul uw wachtwoord in</string>
     <string name="login_form_error">Controleer uw gegevens</string>
 
-
-
     <!-- Welcome Page -->
     <string name="welcome_email_address">Email adres</string>
     <string name="welcome_password">wachtwoord</string>
@@ -65,6 +63,8 @@
 
     <!-- Profile Page -->
     <string name="profile_toolbar_title"></string>
+    <string name="user">Gebruiker</string>
+
 
 
 </resources>
